@@ -1,0 +1,66 @@
+<main fxFlex>
+  <app-breadcrumbs [breadcrumbs]="[{label: 'Home', url: '/'}, {label: 'Bibliografia e Pubblicazioni', url: '/public'}]"></app-breadcrumbs>
+  <h1 class="hmain">Bibliografia e Pubblicazioni</h1>
+
+  <mat-divider></mat-divider>
+    <section class="search">
+    <!--<h3 class="primary">Ricerca news</h3>-->
+    <form [formGroup]="searchForm" fxLayout="column">
+      <!--<mat-form-field appearance="fill">
+        <mat-label>Titolo</mat-label>
+        <input matInput formControlName="titolo" placeholder="Titolo">
+      </mat-form-field>-->
+      <mat-form-field appearance="fill">
+        <mat-label>Ricerca</mat-label>
+        <input matInput formControlName="testo" placeholder="Corpo del cenno storico">
+        <mat-icon (click)="search()" matSuffix>search</mat-icon>
+      </mat-form-field>
+    </form>
+    <div class="actions">
+       <!--<button mat-raised-button color="primary" (click)="reset()">Reset</button>
+      <button mat-raised-button color="primary" (click)="search()">Cerca</button>-->
+    </div>
+
+  </section>
+  <mat-divider></mat-divider>
+  <section>
+    <p>
+      Torem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio
+       mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur
+       tempus urna at turpis condim lobortis. Ut commodo efficitur neque. Ut diam quam, semper iaculis condimentum ac,
+        vestibulum eu nisl.Torem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum,
+        ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+        Curabitur tempus urna at turpis mentum lobortis. Ut commodo efficitur neque. Ut diam quam, semper iaculis condimentum
+        ac, vestibulum eu nisl.
+    </p>
+
+    <p>
+      Torem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio
+       mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur
+       tempus urna at turpis condim lobortis. Ut commodo efficitur neque. Ut diam quam, semper iaculis condimentum ac,
+        vestibulum eu nisl.Torem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum,
+        ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+        Curabitur tempus urna at turpis mentum lobortis. Ut commodo efficitur neque. Ut diam quam, semper iaculis condimentum
+        ac, vestibulum eu nisl.
+    </p>
+  </section>
+
+  <section class="cardContainer">
+
+    <div class="grid">
+      <div class="gridContent"><app-pubblicazioni-card></app-pubblicazioni-card></div>
+      <div class="gridContent"><app-pubblicazioni-card></app-pubblicazioni-card></div>
+      <div class="gridContent"><app-pubblicazioni-card></app-pubblicazioni-card></div>
+      <div class="gridContent"><app-pubblicazioni-card></app-pubblicazioni-card></div>
+      <div class="gridContent"><app-pubblicazioni-card></app-pubblicazioni-card></div>
+      <div class="gridContent"><app-pubblicazioni-card></app-pubblicazioni-card></div>
+      <div class="gridContent"><app-pubblicazioni-card></app-pubblicazioni-card></div>
+      <div class="gridContent"><app-pubblicazioni-card></app-pubblicazioni-card></div>
+      <div class="gridContent"><app-pubblicazioni-card></app-pubblicazioni-card></div>
+      <div class="gridContent"><app-pubblicazioni-card></app-pubblicazioni-card></div>
+      <div class="gridContent"><app-pubblicazioni-card></app-pubblicazioni-card></div>
+      <div class="gridContent"><app-pubblicazioni-card></app-pubblicazioni-card></div>
+    </div>
+
+  </section>
+</main>

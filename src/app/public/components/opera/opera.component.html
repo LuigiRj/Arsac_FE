@@ -1,0 +1,18 @@
+<ng-container *ngIf="immagine">
+  <div class="opera-background" [style.background-image]="'url(' + immagine + ')'">
+  </div>
+  <ng-container *ngIf="opera">
+    <app-breadcrumbs
+      [breadcrumbs]="[{label: 'Home', url: '/'}, {label: 'Opere', url: '/public'}, {label: '' + opera.titolo, url: '/' + opera.id}]"></app-breadcrumbs>
+    <div class="">
+      <h1>{{ opera.titolo }}</h1>
+    </div>
+    <div class="main-grid">
+        <app-carousel [opera]="opera"></app-carousel>
+    </div>
+    <div class="container-text">
+      {{opera.descrizione}}
+    </div>
+  </ng-container>
+</ng-container>
+

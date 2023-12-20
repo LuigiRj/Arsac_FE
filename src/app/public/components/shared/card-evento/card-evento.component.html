@@ -1,0 +1,17 @@
+<div class="card">
+  <div class="meta">
+    <div class="photo" [style.background-image]="'url(' + immagine + ')'"></div>
+    <ul class="details">
+      <li class="inizio">{{evento.data_fine | date}}</li>
+      <li class="fine">{{evento.data_fine | date}}</li>
+    </ul>
+  </div>
+  <div class="card-content">
+    <h1>{{ evento.titolo }}</h1>
+    <p [innerHtml]="(evento.testo.length > 150) ? (evento.testo | slice:0:150)+'...':(evento.testo)"></p>
+    <p class="read-more">
+      <button mat-raised-button color="primary" routerLink="/public/mostre/{{evento.id}}">Leggi di più</button>
+    </p>
+  </div>
+</div>
+

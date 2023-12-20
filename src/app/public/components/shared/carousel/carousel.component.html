@@ -1,0 +1,30 @@
+<div class="carousel" *ngIf="items.length > 0">
+  <div class="carousel-inner">
+    <div *ngFor="let item of items; let i = index" class="carousel-item" [class.active]="i === activeIndex">
+      <img [src]="item" [alt]="item.caption" (click)="openImage(i)">
+      <div class="carousel-caption">
+        <h5>{{item.caption}}</h5>
+        <p>{{item.description}}</p>
+      </div>
+    </div>
+  </div>
+  <a class="carousel-control-prev" role="button" (click)="prev()">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Precedente</span>
+  </a>
+  <a class="carousel-control-next" role="button" (click)="next()">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Prossima</span>
+  </a>
+</div>
+
+<ng-template #detailsModal>
+  <mat-dialog-content class="mat-typography">
+    <div class="no-hide">
+      <img src="{{immagine}}" alt="{{opera.titolo}} - {{opera.autore}}">
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Chiudi</button>
+  </mat-dialog-actions>
+</ng-template>

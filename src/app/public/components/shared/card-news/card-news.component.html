@@ -1,0 +1,10 @@
+<a routerLink="/public/news/{{news.id}}">
+  <div class="card">
+    <img [src]="immagine" alt="{{news.titolo}} - {{news.autore}}">
+    <div class="card-content">
+      <h2 class="card-title">{{ news.titolo }}</h2>
+      <p class="card-text" [innerHtml]="(news.testo.length > 150) ? (news.testo | slice:0:150)+'...':(news.testo)"></p>
+    </div>
+    <button mat-raised-button color="primary" href="#" class="read-more-button">Leggi di più</button>
+  </div>
+</a>

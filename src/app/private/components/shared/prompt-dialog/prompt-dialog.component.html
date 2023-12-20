@@ -1,0 +1,16 @@
+<div fxLayout="row wrap">
+  <div fxFlex="100%">
+    {{ text }}
+    <br />
+    <br />
+  </div>
+  <mat-form-field fxFlex>
+    <input matInput [placeholder]="text" [(ngModel)]="returnValue">
+  </mat-form-field>
+</div>
+<mat-dialog-actions align="end">
+  <button mat-raised-button (click)="save()">
+    Salva
+  </button>
+  <button mat-raised-button (click)="cancel()">Chiudi</button>
+</mat-dialog-actions>

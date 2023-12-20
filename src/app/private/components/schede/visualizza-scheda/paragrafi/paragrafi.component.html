@@ -1,0 +1,8 @@
+<ng-container *ngIf="show">
+  <h3>{{ paragrafo.acr }} - {{ paragrafo.def }}</h3>
+  <div *ngFor="let c of children" fxLayout="row wrap" #child>
+    <div fxFlex class="p-12">
+      <app-paragrafi-child [paragrafo]="c" [scheda]="scheda" [paragrafo_acr]="paragrafo.acr"></app-paragrafi-child>
+    </div>
+  </div>
+</ng-container>

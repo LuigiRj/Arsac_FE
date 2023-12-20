@@ -1,0 +1,7 @@
+<iframe [ngClass]="{'fullScreen' : fullScreen}" id="myIframe" src="https://maggioliurbino.supertour360.com/"></iframe>
+<button mat-raised-button color="primary" *ngIf="fullScreen" (click)="fullScreen = !fullScreen">
+  <mat-icon>fullscreen_exit</mat-icon>
+</button>
+<button mat-raised-button color="primary" *ngIf="!fullScreen" (click)="fullScreen = !fullScreen">
+  <mat-icon>fullscreen</mat-icon>
+</button>

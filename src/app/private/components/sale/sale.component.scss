@@ -1,0 +1,87 @@
+* {
+  text-decoration: none;
+  color: black;
+}
+
+svg {
+
+  rect,
+  path {
+    cursor: pointer;
+    stroke: #333;
+    fill: rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+    opacity: 0.5;
+
+    &:hover {
+      opacity: 1;
+      fill: lightblue !important;
+    }
+  }
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    display: inline-block;
+
+    button {
+      display: inline-block;
+      margin: 0 10px;
+      padding: 5px 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      cursor: pointer;
+
+      &:hover {
+        background: #ccc;
+      }
+    }
+  }
+}
+
+h1 .sala {
+  text-transform: capitalize;
+}
+
+.back {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  z-index: 100;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  padding: 10px;
+}
+
+svg {
+  max-width: 50%;
+  margin: auto;
+  transform-origin: top center;
+}
+
+.hover-popup {
+  position: relative;
+}
+
+.popup-content {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  display: none;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  width: 200px;
+}
+
+.hover-popup:hover .popup-content {
+  display: flex;
+  justify-content: space-evenly;
+}

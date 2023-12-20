@@ -1,0 +1,49 @@
+<div class="container-opere" fxLayout="row" fxLayout.xs="column" fxLayout.sm="column">
+  <aside fxFlex.md="30%" fxFlex.sm="60%" fxFlex.xs="100" fxFlex="20" class="ricerca-sidebar">
+    <app-breadcrumbs [breadcrumbs]="[{label: 'Home', url: '/'}, {label: 'Opere', url: '/public'}]"></app-breadcrumbs>
+    <h3 class="primary">Ricerca opera</h3>
+    <form [formGroup]="searchForm" fxLayout="column">
+      <mat-form-field appearance="fill">
+        <mat-label>Titolo</mat-label>
+        <input matInput formControlName="titolo" placeholder="Titolo">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Descrizione</mat-label>
+        <input matInput formControlName="descrizione" placeholder="Descrizione">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Autore</mat-label>
+        <input matInput formControlName="autore" placeholder="Autore">
+      </mat-form-field>
+    </form>
+    <div class="actions">
+      <button mat-raised-button color="primary" (click)="reset()">Reset</button>
+      <button mat-raised-button color="primary" (click)="search()">Cerca</button>
+    </div>
+  </aside>
+  <main fxFlex class="">
+    <section class="title">
+      <h1>[ OPERE ]</h1>
+      <div class="sorting">
+        <mat-form-field>
+          <mat-label>Ordina per</mat-label>
+          <mat-select name="Ordina" id="select" (selectionChange)="sortBy($event)" matNativeControl [value]="'desc'">
+            <mat-option value="asc">Crescente</mat-option>
+            <mat-option value="desc">Descrescente</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </section>
+    <div>
+      <div fxLayout="row wrap" matSort>
+        <div fxFlex="33" fxFlex.xs="0 0 100%" fxFlex.sm="0 0 50%" fxFlex.md="0 0 50%" fxFlex.lg="0 0 33%" *ngFor="let opera of opere.data" fxLayoutAlign="start stretch">
+          <app-card-opera [opera]="opera"></app-card-opera>
+        </div>
+      </div>
+      <div class="empty-table" *ngIf="opere.data.length===0">
+        Nessun elemento presente. Per iniziare compila il form di ricerca
+      </div>
+    </div>
+    <mat-paginator [pageSizeOptions]="[9, 50, 100]"> </mat-paginator>
+  </main>
+</div>

@@ -1,0 +1,122 @@
+
+<main fxFlex>
+  <app-breadcrumbs [breadcrumbs]="[{label: 'Home', url: '/'}, {label: 'Storia', url: '/public'}]"></app-breadcrumbs>
+  <h1 class="hmain">Storia</h1>
+
+  <section>
+    <p>
+      Torem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio
+       mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur
+       tempus urna at turpis condim lobortis. Ut commodo efficitur neque. Ut diam quam, semper iaculis condimentum ac,
+        vestibulum eu nisl.Torem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum,
+        ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+        Curabitur tempus urna at turpis mentum lobortis. Ut commodo efficitur neque. Ut diam quam, semper iaculis condimentum
+        ac, vestibulum eu nisl.
+    </p>
+
+    <p>
+      Torem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio
+       mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur
+       tempus urna at turpis condim lobortis. Ut commodo efficitur neque. Ut diam quam, semper iaculis condimentum ac,
+        vestibulum eu nisl.Torem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum,
+        ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+        Curabitur tempus urna at turpis mentum lobortis. Ut commodo efficitur neque. Ut diam quam, semper iaculis condimentum
+        ac, vestibulum eu nisl.
+    </p>
+  </section>
+
+  <section class="cardContainer">
+
+    <mat-card class="example-card">
+      <mat-card-header>
+      </mat-card-header>
+
+      <mat-card-content>
+        <mat-grid-list cols="5" rows="3" [rowHeight]="ratio">
+          <mat-grid-tile class="cardTitleContainer" [colspan]="tile[0].cols"  [rowspan]="tile[0].rows"><h2>Enti Prodnti</h2></mat-grid-tile>
+          <mat-grid-tile class="cardImgContainer" [colspan]="tile[1].cols"  [rowspan]="tile[1].rows"><img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"></mat-grid-tile>
+          <mat-grid-tile class="textTile" [colspan]="tile[2].cols"  [rowspan]="tile[2].rows">  <div class="text-inside-grid">Torem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio
+            mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur
+            tempus urna at turpis condim lobortis. Ut commodo efficitur neque. Ut diam quam, semper iaculis condimentum ac,
+             vestibulum eu nisl.Torem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum,
+             ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+             Curabitur tempus urna at turpis mentum lobortis. Ut commodo efficitur neque. Ut diam quam, semper iaculis condimentum
+             ac, vestibulum eu nisl.Torem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio
+             mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur
+             tempus urna at turpis condim lobortis. Ut commodo efficitur neque. Ut diam quam, semper iaculis condimentum ac,
+              vestibulum eu nisl.Torem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum,
+              ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+              Curabitur tempus urna at turpis mentum lobortis. Ut commodo efficitur neque. Ut diam quam, semper iaculis condimentum
+              ac, vestibulum eu nisl. </div></mat-grid-tile>
+          <mat-grid-tile class="cardButtonContainer" [colspan]="tile[3].cols"  [rowspan]="tile[3].rows"> <button (click)="navigate('Enti-prodnti')" color="primary" class="mat-focus-indicator mat-raised-button mat-button-base mat-primary" mat-button>Leggi di più</button></mat-grid-tile>
+        </mat-grid-list>
+      </mat-card-content>
+      <mat-card-actions>
+
+
+      </mat-card-actions>
+    </mat-card>
+
+    <mat-card class="example-card">
+      <mat-card-header>
+      </mat-card-header>
+
+      <mat-card-content>
+        <mat-grid-list cols="5" rows="3" [rowHeight]="ratio">
+          <mat-grid-tile class="cardTitleContainer" [colspan]="tile[0].cols"  [rowspan]="tile[0].rows"><h2>Ente conservatore</h2></mat-grid-tile>
+          <mat-grid-tile class="cardImgContainer" [colspan]="tile[1].cols"  [rowspan]="tile[1].rows"><img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"></mat-grid-tile>
+          <mat-grid-tile class="textTile" [colspan]="tile[2].cols"  [rowspan]="tile[2].rows"> <div class="text-inside-grid">Torem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio
+            mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur
+            tempus urna at turpis condim lobortis. Ut commodo efficitur neque. Ut diam quam, semper iaculis condimentum ac,
+             vestibulum eu nisl.Torem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum,
+             ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+             Curabitur tempus urna at turpis mentum lobortis. Ut commodo efficitur neque. Ut diam quam, semper iaculis condimentum
+             ac, vestibulum eu nisl.Torem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio
+             mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur
+             tempus urna at turpis condim lobortis. Ut commodo efficitur neque. Ut diam quam, semper iaculis condimentum ac,
+              vestibulum eu nisl.Torem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum,
+              ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+              Curabitur tempus urna at turpis mentum lobortis. Ut commodo efficitur neque. Ut diam quam, semper iaculis condimentum
+              ac, vestibulum eu nisl.</div></mat-grid-tile>
+          <mat-grid-tile class="cardButtonContainer" [colspan]="tile[3].cols"  [rowspan]="tile[3].rows"> <button (click)="navigate('Enti-consen.')" color="primary" class="mat-focus-indicator mat-raised-button mat-button-base mat-primary" mat-button>Leggi di più</button></mat-grid-tile>
+        </mat-grid-list>
+      </mat-card-content>
+      <mat-card-actions>
+
+
+      </mat-card-actions>
+    </mat-card>
+
+    <mat-card class="example-card">
+      <mat-card-header>
+      </mat-card-header>
+
+      <mat-card-content>
+        <mat-grid-list cols="5" rows="3" [rowHeight]="ratio">
+         <mat-grid-tile class="cardTitleContainer" [colspan]="tile[0].cols"  [rowspan]="tile[0].rows"><h2>Archivio</h2></mat-grid-tile>
+          <mat-grid-tile class="cardImgContainer" [colspan]="tile[1].cols"  [rowspan]="tile[1].rows"><img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"></mat-grid-tile>
+          <mat-grid-tile class="textTile" [colspan]="tile[2].cols"  [rowspan]="tile[2].rows"> <div class="text-inside-grid">Torem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio
+            mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur
+            tempus urna at turpis condim lobortis. Ut commodo efficitur neque. Ut diam quam, semper iaculis condimentum ac,
+             vestibulum eu nisl.Torem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum,
+             ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+             Curabitur tempus urna at turpis mentum lobortis. Ut commodo efficitur neque. Ut diam quam, semper iaculis condimentum
+             ac, vestibulum eu nisl.Torem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio
+             mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur
+             tempus urna at turpis condim lobortis. Ut commodo efficitur neque. Ut diam quam, semper iaculis condimentum ac,
+              vestibulum eu nisl.Torem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum,
+              ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+              Curabitur tempus urna at turpis mentum lobortis. Ut commodo efficitur neque. Ut diam quam, semper iaculis condimentum
+              ac, vestibulum eu nisl.</div></mat-grid-tile>
+          <mat-grid-tile class="cardButtonContainer" [colspan]="tile[3].cols"  [rowspan]="tile[3].rows"> <button (click)="navigate('archivio')" color="primary" class="mat-focus-indicator mat-raised-button mat-button-base mat-primary" mat-button>Leggi di più</button></mat-grid-tile>
+        </mat-grid-list>
+      </mat-card-content>
+      <mat-card-actions>
+
+
+      </mat-card-actions>
+    </mat-card>
+
+
+  </section>
+</main>

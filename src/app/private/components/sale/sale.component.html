@@ -1,0 +1,126 @@
+<div class="breadcrumbs">
+  <a href="javascript: return false;" (click)="edificioSelected = pianoSelected = salaSelected = undefined">Home</a>
+  <ng-container *ngIf="edificioSelected">
+    >>
+    <a href="javascript: return false;" (click)="pianoSelected = salaSelected = undefined">
+      {{ edificioSelected.nome }}
+    </a>
+  </ng-container>
+  <ng-container *ngIf="pianoSelected">
+    >>
+    <a href="javascript: return false;" (click)="salaSelected = undefined">
+      {{ pianoSelected.nome }}
+    </a>
+  </ng-container>
+  <ng-container *ngIf="salaSelected">
+    >>
+    {{ salaSelected.nome }}
+  </ng-container>
+</div>
+
+<ng-container *ngIf="!edificioSelected">
+  <h2> Seleziona un'edificio </h2>
+  <ul>
+    <li *ngFor="let edificio of edificiDataSource">
+      <button mat-button (click)="loadEdificio(edificio)">
+        {{ edificio.nome }}
+      </button>
+    </li>
+  </ul>
+</ng-container>
+
+<ng-container *ngIf="edificioSelected">
+  <h2 *ngIf="!pianoSelected"> Seleziona un piano </h2>
+  <ng-container *ngIf="!pianoSelected">
+    <ul>
+      <li *ngFor="let piano of pianiDataSource">
+        <button mat-button (click)="loadPiano(piano)">
+          {{ piano.nome }}
+        </button>
+      </li>
+    </ul>
+  </ng-container>
+  <ng-container *ngIf="pianoSelected">
+    <h2 *ngIf="!salaSelected">Seleziona una sala</h2>
+    <ng-container *ngIf="!salaSelected">
+      <div class="svg-container">
+        <svg [attr.viewBox]="pianoSelected.viewBox" xmlns="http://www.w3.org/2000/svg">
+          <g *ngFor="let sala of saleDataSource">
+            <rect (click)="loadSala(sala)" [attr.x]="sala.svg.x" [attr.y]="sala.svg.y" [attr.width]="sala.svg.width"
+              [attr.height]="sala.svg.height" />
+            <text [attr.x]="sala.svg.x + sala.svg.width / 2" [attr.y]="sala.svg.y + sala.svg.height / 2"
+              text-anchor="middle" style="pointer-events: none;">
+              {{ sala.nome }}
+            </text>
+          </g>
+        </svg>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="salaSelected">
+      <h2 class="sala">{{ salaSelected.nome }}</h2>
+
+      <div>
+        <form [formGroup]="searchForm" class="py-12">
+          <div fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutGap="10px" fxLayoutGap.lt-md="0">
+            <mat-form-field fxFlex>
+              <input formControlName="denominazione" matInput placeholder="denominazione">
+            </mat-form-field>
+            <div fxFlex="144px">
+              <button mat-raised-button (click)="search()" class="mt-4 mx-4" aria-label="Cerca">
+                <mat-icon class="mat-24">search</mat-icon>
+              </button>
+              <button mat-raised-button (click)="clear()" class="mt-4 mx-4" aria-label="Reset">
+                <mat-icon class="mat-24">clear</mat-icon>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <h3 >Lista delle opere presenti nella sala</h3>
+      <div class="mat-elevation-z8 mt-20" >
+        <mat-table #table [dataSource]="opereDataSource" class="table-condensed" matSort>
+          <ng-container matColumnDef="id">
+            <mat-header-cell fxFlex="200px" *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
+            <mat-cell fxFlex="200px" *matCellDef="let row">{{ row.id }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="denominazione">
+            <mat-header-cell fxFlex *matHeaderCellDef mat-sort-header>Denominazione</mat-header-cell>
+            <mat-cell fxFlex *matCellDef="let row">{{ row._source.__denominazione }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="dettagli">
+            <mat-header-cell fxFlex="220px" *matHeaderCellDef>Dettagli</mat-header-cell>
+            <mat-cell fxFlex="220px" fxLayoutGap="4px" *matCellDef="let row">
+              <button mat-raised-button class="primary" routerLink="/schede/scheda/{{row.id}}" title="Modifica"
+                aria-label="Modifica">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-raised-button class="primary" routerLink="/schede/visualizza/{{row.id}}" title="Visualizza"
+                aria-label="Visualizza">
+                <mat-icon>info</mat-icon>
+              </button>
+              <button mat-raised-button class="primary" routerLink="/monitoraggio/timeline/{{row.id}}" title="Timeline"
+                aria-label="Timeline">
+                <mat-icon>timeline</mat-icon>
+              </button>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *cdkRowDef="let row; columns: displayedColumns;"></mat-row>
+
+        </mat-table>
+
+        <div class="empty-table" *ngIf="opereDataSource.data.length===0">
+          Nessun elemento presente.
+          <br>
+        <button mat-raised-button routerLink="/monitoraggio/timeline">Inserisci</button>
+
+        </div>
+
+        <mat-paginator [pageSizeOptions]="[25, 50, 100]"></mat-paginator>
+      </div>
+    </ng-container>
+  </ng-container>
+</ng-container>

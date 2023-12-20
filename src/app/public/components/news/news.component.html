@@ -1,0 +1,24 @@
+<ng-container *ngIf="immagine">
+  <ng-container *ngIf="news">
+    <app-breadcrumbs
+      [breadcrumbs]="[{label: 'Home', url: '/'}, {label: 'News', url: '/public/news'}, {label: '' + news.titolo, url: '/' + news.id}]"></app-breadcrumbs>
+      <div class="container" fxLayout="column">
+        <h1>{{ news.titolo }}</h1>
+        <div fxLayout="row" fxLayoutAlign="center center">
+          <img [src]="immagine" alt="{{ news.titolo }}" fxLayout="column" fxLayoutAlign="center center" fxFlex="40" (click)="openImage()">
+        </div>
+        <p fxLayout="column" fxFlex="60" [innerHTML]="news.testo">
+        </p>
+        <div class="bottom mat-caption" fxLayout="row" fxLayoutAlign="end center">
+          <div class="">
+            <p>{{ news.createdAt | date: 'shortDate' }} </p>
+            <p> di {{ news.autore }}</p>
+          </div>
+        </div>
+      </div>
+  </ng-container>
+</ng-container>
+
+<ng-template #detailsModal>
+  <img class="no-hide" src="{{immagine}}" alt="{{news.titolo}} - {{news.autore}}">
+</ng-template>

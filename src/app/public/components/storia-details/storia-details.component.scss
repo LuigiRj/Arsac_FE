@@ -1,0 +1,26 @@
+.hmain{
+  padding-left: 8vh;
+}
+section{
+  padding-left: 8vh;
+  padding-right: 8vh;
+}
+
+.frontImage{
+  width: 100%;
+  height: 30vh;
+
+}
+
+@media (max-width: 480px) {
+  .hmain{
+    padding-left: 1vh;
+  }
+
+  section{
+    padding-left: 1vh;
+    padding-right: 1vh;
+  }
+
+
+}

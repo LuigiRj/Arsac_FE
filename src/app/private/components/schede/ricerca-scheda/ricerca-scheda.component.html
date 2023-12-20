@@ -1,0 +1,139 @@
+<div class="content-card">
+
+  <form [formGroup]="searchForm" class="py-12">
+    <div fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutGap="10px" fxLayoutGap.lt-md="0">
+      <mat-form-field fxFlex>
+        <mat-select formControlName="TSK" placeholder="Tipo Scheda">
+          <mat-option *ngFor="let tipoScheda of tipiSchedaDataSource" [value]="tipoScheda.tsk">
+            {{ tipoScheda.des }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input matInput formControlName="__denominazione" placeholder="Denominazione">
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input matInput formControlName="AUTN" placeholder="Autore">
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input matInput formControlName="DTZG" placeholder="Secolo">
+      </mat-form-field>
+      <mat-form-field fxFlex *ngIf="admin || schedatore">
+        <mat-select formControlName="__validated" placeholder="Validazione">
+          <mat-option value="tutte">Tutte</mat-option>
+          <mat-option [value]="true">Validata</mat-option>
+          <mat-option [value]="false">Non Validata</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div fxFlex>
+        <mat-checkbox class="my-8" formControlName="attive">Attive</mat-checkbox>
+      </div>
+      <mat-form-field fxFlex="50%">
+        <input matInput formControlName="match_all" placeholder="Libera ricerca">
+      </mat-form-field>
+      <mat-form-field fxFlex="33%" *ngIf="direzione || admin">
+        <input matInput formControlName="user" placeholder="User" [matAutocomplete]="autoUser">
+        <mat-autocomplete #autoUser="matAutocomplete" [displayWith]="utilsService.displayEntity">
+          <mat-option *ngFor="let u of usersDataSource | async" [value]="u">
+            {{ u }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <div fxFlex="144px">
+        <button mat-raised-button (click)="search()" class="mt-4 mx-4" title="Cerca" aria-label="Cerca">
+          <mat-icon class="mat-24">search</mat-icon>
+        </button>
+        <button mat-raised-button (click)="clear()" class="mt-4 mx-4" title="Reset campi di ricerca"
+          aria-label="Reset campi di ricerca">
+          <mat-icon class="mat-24">clear</mat-icon>
+        </button>
+      </div>
+    </div>
+
+  </form>
+
+  <h2 *ngIf="restoring">Riattiva Schede</h2>
+
+  <div class="mat-elevation-z8 mt-20">
+    <mat-table #table [dataSource]="dataSource" class="table-condensed" matSort>
+      <ng-container matColumnDef="visualizzazione">
+        <mat-header-cell fxFlex="" *matHeaderCellDef>Vedi Scheda</mat-header-cell>
+        <mat-cell fxFlex="" *matCellDef="let row">
+          <ng-container *ngIf="row._source.deletedAt === null">
+            <button mat-raised-button title="Vedi la scheda selezionata" (click)="view(row)" class="colorPrimary"
+              aria-label="Vedi scheda selezionata">
+              <mat-icon>info</mat-icon>
+            </button>
+          </ng-container>
+          <ng-container *ngIf="row._source.deletedAt !== null">
+            <button mat-raised-button title="Riattiva scheda selezionata" (click)="restore(row)" class="colorPrimary"
+              aria-label="Riattiva scheda selezionata">
+              <mat-icon>restore</mat-icon>
+            </button>
+          </ng-container>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="data_creazione">
+        <mat-header-cell fxFlex="" *matHeaderCellDef mat-sort-header>Data creazione</mat-header-cell>
+        <mat-cell fxFlex="" *matCellDef="let row">{{ row._source.createdAt | date }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="id">
+        <mat-header-cell fxFlex="" *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
+        <mat-cell fxFlex="" *matCellDef="let row">{{ row.id }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="TSK">
+        <mat-header-cell fxFlex *matHeaderCellDef mat-sort-header>TSK</mat-header-cell>
+        <mat-cell fxFlex *matCellDef="let row">{{ row._source?.CD?.TSK }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Titolo">
+        <mat-header-cell fxFlex *matHeaderCellDef mat-sort-header>Identificativo</mat-header-cell>
+        <mat-cell fxFlex *matCellDef="let row">{{ row._source.__denominazione ?? 'Nessun nome' }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="__validated">
+        <mat-header-cell fxFlex *matHeaderCellDef mat-sort-header>Validata</mat-header-cell>
+        <mat-cell fxFlex *matCellDef="let row"><span
+            [ngStyle]="{'color': row._source.__validated ? 'inherit' : 'red'}">{{ row._source.__validated ? 'Validata' :
+            'Da validare'}}</span></mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="dettagli" *ngIf="admin || schedatore">
+        <mat-header-cell fxFlex="144px" *matHeaderCellDef>Dettagli</mat-header-cell>
+        <mat-cell fxFlex="144px" fxLayoutGap="4px" *matCellDef="let row">
+          <ng-container *ngIf="row._source.deletedAt === null">
+            <button mat-raised-button title="Modifica la scheda selezionata" (click)="edit(row)" class="colorPrimary"
+              aria-label="Seleziona">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-raised-button title="Elimina la scheda selezionata" (click)="delete(row)" color="danger"
+              aria-label="Elimina">
+              <mat-icon class="primaryButton">delete</mat-icon>
+            </button>
+          </ng-container>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="(admin || schedatore) ? displayedColumns : displayedUser"></mat-header-row>
+      <mat-row *cdkRowDef="let row; columns: (admin || schedatore) ? displayedColumns : displayedUser;"></mat-row>
+
+    </mat-table>
+    <!-- </ng-container> -->
+    <div class="empty-table" *ngIf="dataSource.data.length===0">
+      Nessun elemento presente. Per iniziare compila il form di ricerca
+    </div>
+
+    <mat-paginator [pageSizeOptions]="[25, 50, 100]"> </mat-paginator>
+  </div>
+</div>
+
+
+<div class="new-item" *ngIf="admin || schedatore">
+  <button mat-fab class="colorPrimary" title="Inserisci una nuova scheda" aria-label="Inserisci una nuova scheda"
+    routerLink="/schede/inserisci">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

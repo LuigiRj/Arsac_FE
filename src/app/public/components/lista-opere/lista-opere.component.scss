@@ -1,0 +1,114 @@
+main {
+  height: 100%;
+  width: 100%;
+  padding-left: 30%;
+  flex: 1;
+
+  section {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .title {
+    margin: 3rem 1rem 0 2rem;
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+  }
+}
+
+.container-opere {
+  height: 100% !important;
+  min-height: 100vh;
+}
+
+aside {
+  height: 100%;
+  border-right: 1px solid #d3d3d3;
+  box-shadow: 10px 0 10px -10px #222;
+  position: fixed;
+  top: 100;
+  left: 0;
+}
+
+.primary {
+  color: var(--primary);
+}
+
+.ricerca-sidebar {
+  height: 100%;
+  padding: 20px;
+  width: 100%;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.sorting {
+  display: flex;
+  justify-content: flex-end;
+  margin: 20px;
+  // max-width: 350px;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.card-container {
+  display: flex;
+  margin: 40px 0;
+  gap: 20px;
+  justify-content: center;
+  align-content: start;
+  flex-wrap: wrap;
+}
+
+.image-container {
+  padding: 10px;
+}
+
+app-card-opera {
+  flex: 0 0 100%;
+  display: flex;
+  justify-content: center;
+}
+
+mat-paginator {
+  background-color: transparent;
+  margin: 80px 8px 20px 0;
+}
+
+div[fxLayout] > div {
+  margin-bottom: 20px;
+}
+
+@media (max-width: 60em) {
+  main {
+    padding-left: 0;
+  }
+  aside {
+    position: relative;
+  }
+  .actions {
+    justify-content: space-between;
+  }
+}
+@media (min-width: 60em) {
+  main {
+    padding-left: 30%;
+  }
+}
+
+@media (min-width: 80em) {
+  main {
+    padding-left: 20% !important;
+  }
+}

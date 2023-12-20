@@ -1,0 +1,129 @@
+<div class="content-card">
+
+  <form [formGroup]="searchForm" class="py-12">
+    <div fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutGap="10px" fxLayoutGap.lt-md="0">
+      <mat-form-field fxFlex>
+        <input formControlName="titolo" matInput placeholder="Titolo">
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input formControlName="testo" matInput placeholder="Descrizione">
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input formControlName="autore" matInput placeholder="Autore">
+      </mat-form-field>
+      <div fxFlex="144px">
+        <button mat-raised-button (click)="search()" class="mt-4 mx-4" aria-label="Cerca" title="Ricerca">
+          <mat-icon class="mat-24" >search</mat-icon>
+        </button>
+        <button mat-raised-button (click)="clear()" class="mt-4 mx-4" aria-label="Reset" title="Resetta i campi">
+          <mat-icon class="mat-24">clear</mat-icon>
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <div class="mat-elevation-z8 mt-20">
+    <mat-table #table [dataSource]="dataSource" class="table-condensed" matSort>
+      <ng-container matColumnDef="id">
+        <mat-header-cell fxFlex="74px" *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
+        <mat-cell fxFlex="74px" *matCellDef="let row">{{ row.id }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="titolo">
+        <mat-header-cell fxFlex *matHeaderCellDef mat-sort-header>Titolo</mat-header-cell>
+        <mat-cell fxFlex *matCellDef="let row">{{ row.titolo }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="testo">
+        <mat-header-cell fxFlex *matHeaderCellDef mat-sort-header>Testo</mat-header-cell>
+        <mat-cell fxFlex *matCellDef="let row" [innerHtml]="(row.testo.length > 150) ? (row.testo | slice:0:150)+'...':(row.testo)"></mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="autore">
+        <mat-header-cell fxFlex *matHeaderCellDef mat-sort-header>Autore</mat-header-cell>
+        <mat-cell fxFlex *matCellDef="let row">{{ row.autore }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="dettagli">
+        <mat-header-cell fxFlex="150px" *matHeaderCellDef>Dettagli</mat-header-cell>
+        <mat-cell fxFlex="150px" fxLayoutGap="4px" *matCellDef="let row">
+          <button mat-raised-button (click)="edit(row)" class="colorPrimary" aria-label="Seleziona" title="Modifica opera">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *cdkRowDef="let row; columns: displayedColumns;"></mat-row>
+
+    </mat-table>
+
+    <div class="empty-table" *ngIf="dataSource.data.length===0">
+      Nessun elemento presente. Per iniziare compila il form di ricerca
+    </div>
+
+    <mat-paginator [pageSizeOptions]="[25, 50, 100]"> </mat-paginator>
+  </div>
+</div>
+<ng-template #detailsModal let-data>
+  <mat-dialog-content class="mat-typography">
+    <h2 *ngIf="editItem && editItem.id" mat-dialog-title>Modifica News</h2>
+    <h2 *ngIf="editItem && !editItem.id" mat-dialog-title>Inserisci News</h2>
+    <form [formGroup]="editItemForm">
+      <div fxLayout="row wrap" fxLayoutGap="12px">
+        <mat-form-field fxFlex="calc(60% - 12px)">
+          <input required formControlName="titolo" matInput placeholder="Titolo" maxlength="60">
+        </mat-form-field>
+        <mat-form-field fxFlex="calc(33% - 12px)">
+          <input formControlName="autore" matInput placeholder="Autore">
+        </mat-form-field>
+        <div fxFlex="calc(100% - 12px)">
+          <mat-label>Testo della news</mat-label>
+          <ckeditor required="" formControlName="testo" [editor]="Editor" (ready)="onReady($event)"></ckeditor>
+        </div>
+        <div class="">
+          <mat-form-field fxFlex="calc(50% - 12px)">
+            <input formControlName="id_opera" matInput placeholder="Scheda allegata">
+          </mat-form-field>
+        </div>
+      </div>
+      <!-- ngx upload -->
+      <div>
+        <h2 class="allegati">Scegli una immagine</h2>
+        <div class="ngx_upload">
+          <ngx-upload [multiple]="true" [asDialog]="false" (afterUpload)="handleUpload($event)"
+            (afterError)="handleUploadError($event)"></ngx-upload>
+        </div>
+      </div>
+      <ng-container *ngIf="editItemForm.controls.immagini.value">
+        <div class="" *ngFor="let a of editItemForm.controls.immagini.value">
+          <div class="area_allegati">
+            <div class="nome_allegato">
+              <p>{{ a.originalFilename }}</p>
+            </div>
+            <div class="">
+              <button class="" mat-raised-button title="Elimina allegato" (click)="deleteFile(a)" *ngIf="editItemForm.enabled">
+                <mat-icon>remove_circle_outline</mat-icon>
+              </button>
+              <button class="" mat-raised-button title="Scarica allegato" (click)="downloadFile(a)" *ngIf="editItemForm.enabled">
+                <mat-icon>download</mat-icon>
+              </button>
+            </div>
+          </div>
+          <hr>
+        </div>
+      </ng-container>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end" *ngIf="editItemForm.controls.immagini.value">
+    <button mat-raised-button (click)="save()" title="Salva opera" [disabled]="!editItemForm.valid && !editItemForm.controls.immagini.value.length">Salva</button>
+    <button mat-raised-button (click)="delete()" title="Elimina opera">Elimina</button>
+    <button mat-raised-button mat-dialog-close title="Chiudi modale">Chiudi</button>
+  </mat-dialog-actions>
+</ng-template>
+
+<div class="new-item">
+  <button mat-fab class="colorPrimary" title="Inserisci nuova opera" aria-label="Inserisci una nuova opera" (click)="new()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

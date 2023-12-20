@@ -1,0 +1,4 @@
+<!-- <div class="px-24 py-8" *ngIf="show"> -->
+    <div class="px-24 py-8">
+  <app-sezione-complessa *ngFor="let s of $any(sezione).sezioni" [sezione]="s" [scheda]="scheda" [paragrafo_acr]="paragrafo_acr"></app-sezione-complessa>
+</div>

@@ -1,0 +1,443 @@
+<div id="museo" fxLayout="row" fxLayout.xs="column">
+  <aside fxFlex.md="30%" fxFlex.sm="100%" fxFlex.xs="0 0 100" fxFlex="20%">
+    <app-breadcrumbs
+      [breadcrumbs]="[{label: 'Home', url: '/'}, {label: 'Museo', url: '/public/museo'}]"></app-breadcrumbs>
+    <div class="">
+      <div class="sidebar">
+        <ul>
+          <span class="head">Museo</span>
+          <ng-container *ngFor="let n of obj">
+            <li><a routerLinkActive="active" routerLink="/public/museo/{{ n.url }}">{{ n.lbl }}</a></li>
+          </ng-container>
+        </ul>
+      </div>
+    </div>
+  </aside>
+  <main fxFlex="100">
+    <div id="missione" *ngIf="activatedRoute == 'missione'">
+      <h1>Missione</h1>
+      <div class="content">
+        <p>Il MAN è un’istituzione pubblica permanente, unica nel suo genere in Sardegna, votata allo studio, la
+          conservazione e la promozione dell’arte moderna e contemporanea. Il museo persegue i propri obiettivi
+          culturali attraverso molteplici attività, svolte sia all’interno della sede museale, sia sul territorio:
+          realizzazione di progetti espositivi dedicati ai linguaggi visivi contemporanei e alla storia dell’arte dal
+          XIX al XXI secolo, valorizzazione del patrimonio custodito (la collezione d’arte sarda dal Novecento a oggi),
+          sviluppo di programmi di formazione, mediazione e didattica per tutti i livelli di pubblico. È l’idea di
+          “museo aperto” che si afferma, un laboratorio permanente di indagine artistica e sperimentazione, uno spazio
+          di produzione e comunicazione dove fare convivere memoria e innovazione, ricerca e divulgazione, pensiero
+          globale e azione locale.</p>
+      </div>
+    </div>
+    <div id="storia" *ngIf="activatedRoute == 'storia-e-sede'">
+      <h1>Storia e sede</h1>
+      <div class="content">
+        <p>Il MAN apre al pubblico nel 1999 all’interno di un edificio degli anni Venti, già sede dell’Istituzione
+          provinciale, situato tra le arterie del centro storico di Nuoro. Fino al 2003 è inserito come ufficio
+          all’interno del settore cultura dell’amministrazione provinciale. Il primo nucleo della collezione nasce
+          dall’accorpamento di alcune raccolte pubbliche (Provincia, Comune, Ente provinciale per il turismo, Camera di
+          commercio). L’idea di una pinacoteca provinciale trova presto sviluppo in un progetto museale aggiornato in
+          cui al lavoro di ricerca e conservazione si affianca un’intensa attività espositiva e laboratoriale. La
+          collezione si arricchisce di nuove acquisizioni e l’attività si estende al contesto territoriale. Nel 2004 il
+          museo acquisisce autonomia gestionale, strutturandosi come Istituzione senza personalità giuridica, ed entra a
+          fare parte di Amaci, l’Associazione nazionale dei musei d’arte contemporanea. Nel 2013 il MAN ottiene il
+          riconoscimento regionale come museo d’eccellenza. Il piano di riordino e sviluppo prevede l’apertura di un
+          nuovo complesso espositivo, nato dal recupero di due edifici storici situati in piazza Sebastiano Satta, e la
+          destinazione della sede attuale a dimora della collezione permanente.</p>
+      </div>
+    </div>
+    <div id="attività" *ngIf="activatedRoute == 'attività-espositiva'">
+      <h1>Attività espositiva</h1>
+      <div class="content">
+        <p>Attività primaria del MAN sono le mostre temporanee, a cui il museo si dedica con regolarità, proponendosi
+          come luogo di ricerca e comunicazione dei fenomeni più innovativi della produzione artistica, nel quadro di
+          una prospettiva culturale dinamica in cui l’identità locale coesiste e si rafforza nel confronto con la
+          globalità del circuito artistico grazie agli scambi con altri musei e a nuove produzioni. In linea con la sua
+          missione, il MAN propone mostre dedicate ad artisti e movimenti della storia dell’arte dal XIX al XXI secolo e
+          progetti sperimentali rivolti ai linguaggi della più stretta contemporaneità. L’attività “extramuros”, svolta
+          al di fuori delle strutture architettoniche del museo, affianca l’attività interna e si propone come una forma
+          di apertura al territorio e di coinvolgimento operativo delle comunità locali. </p>
+      </div>
+    </div>
+    <div id="mediazione" *ngIf="activatedRoute == 'mediazione-e-didattica'">
+      <h1>Mediazione e didattica</h1>
+      <div class="content">
+        <p>Il dipartimento educativo del MAN organizza visite guidate, laboratori e progetti speciali di mediazione e
+          didattica per i diversi livelli di utenza. Le metodologie adottate incoraggiano il coinvolgimento diretto dei
+          partecipanti stimolando lo sviluppo del pensiero critico e la crescita delle capacità creative. In una
+          prospettiva multidisciplinare, i percorsi di visita sono concepiti come occasioni di conoscenza e riflessione
+          sulla storia dell’uomo e sul presente attraverso il contatto diretto con i prodotti materiali della cultura
+          visiva, esaminati in relazione ai cambiamenti della società e allo sviluppo dei diversi linguaggi. I
+          laboratori didattici pongono le forme dell’arte moderna e contemporanea al centro di attività operative
+          orientate allo stimolo delle facoltà di lettura e di analisi e all’accrescimento delle capacità manuali e
+          costruttive.</p>
+
+        <p><strong>Tutte le attività didattiche del MAN sono gratuite.</strong></p>
+
+        <h3>Laboratori per le scuole</h3>
+
+        <p>Appassionanti percorsi di visita, variabili nei contenuti e nelle modalità di trattazione a seconda delle
+          diverse età degli utenti, a cui fanno seguito laboratori manuali ispirati alle tecniche, ai linguaggi e ai
+          temi trattati all’interno delle mostre.</p>
+
+        <i>Tutte le mattine, dal lunedì al venerdì, su prenotazione. A richiesta anche il pomeriggio.</i>
+
+        <h3>Laboratori per adulti</h3>
+        <p>Laboratori innovativi, di livello specialistico, tenuti dal personale del museo oppure realizzati in
+          collaborazione con operatori esterni (artisti, fotografi, insegnanti, esperti di vario genere) su aspetti
+          diversi della produzione artistica contemporanea o su specifiche tecniche di produzione.</p>
+
+        <i>In occasione delle diverse mostre, su prenotazione.</i>
+
+        <h3>Visite guidate per tutti</h3>
+        <p>Percorsi guidati di visita alle mostre e alle collezioni, di durata variabile, tenuti dagli operatori alla
+          ricezione.</p>
+
+        <p>Ogni settimana è prevista una visita guidata a cura di Alessandro Moni, i calendari degli appuntamenti
+          verranno pubblicati mensilmente su sito internet, canali social e newsletter. È necessaria la prenotazione al
+          numero 0784.252110 o tramite mail all’indirizzo alessandro@museoman.it.</p>
+
+        <h3>Conversazioni per adulti, scuole superiori, enti e associazioni</h3>
+        <p>Dialoghi aperti tra il pubblico e gli operatori del museo su tematiche di vario genere trattate all’interno
+          dei percorsi museali.</p>
+
+        <i>Tutti i fine settimana su prenotazione. A richiesta anche negli altri giorni della settimana per classi e
+          gruppi.</i>
+
+        <h3>Progetti speciali per enti e associazioni</h3>
+        <p>Speciali progetti di affiancamento per gli educatori carcerari o per gli operatori dei centri di igiene
+          mentale. Progetti di supporto a condizioni di handicap fisico o mentale, anche in collaborazione con soggetti
+          terzi.</p>
+
+        <i>Tempi e modalità da concordare con i diversi soggetti</i>
+      </div>
+    </div>
+    <div id="partner" *ngIf="activatedRoute == 'partner'">
+      <h1>Partner</h1>
+      <div class="content">
+        <p><a href="https://www.regione.sardegna.it/" target="_blank">Regione Autonoma della Sardegna</a></p>
+        <p><a href="https://www.provincia.nuoro.it/index.php" target="_blank">Provincia di Nuoro</a></p>
+        <p><a href="http://www.fondazionebancodisardegna.it/" target="_blank">Fondazione di Sardegna</a></p>
+        <p><a href="http://www.stradadelvinocannonau.it/" target="_blank">La Strada del vino Cannonau</a></p>
+      </div>
+    </div>
+    <div id="carta" *ngIf="activatedRoute == 'carta-dei-servizi'">
+      <h1>Carta della qualità dei servizi</h1>
+      <div class="content">
+        <h2>Che cos’è la Carta della qualità dei servizi</h2>
+        <p>La Carta della qualità dei servizi risponde all’esigenza di fissare principi e regole nel rapporto tra le
+          amministrazioni che erogano servizi e i cittadini che ne usufruiscono. Essa costituisce un vero e proprio
+          “patto” con gli utenti, uno strumento di comunicazione e di informazione che permette loro di conoscere i
+          servizi offerti, le modalità e gli standard promessi, di verificare che gli impegni assunti siano rispettati,
+          di esprimere le proprie valutazioni anche attraverso forme di reclamo (il modulo si può richiedere in
+          biglietteria).</p>
+
+        <p>L’adozione della Carta dei Servizi da parte del MAN_Museo d’arte della Provincia di Nuoro si inserisce in una
+          serie di iniziative volte a promuovere una più ampia valorizzazione del patrimonio culturale in essa
+          conservato e adeguare per quanto possibile, in armonia con le esigenze della tutela e della ricerca,
+          l’organizzazione delle attività alle aspettative degli utenti.</p>
+
+        <p>La Carta viene aggiornata periodicamente per consolidare i livelli di qualità raggiunti e registrare i
+          cambiamenti positivi intervenuti attraverso la realizzazione di progetti di miglioramento, che possono
+          scaturire anche dal monitoraggio periodico dell’opinione degli utenti. La Carta è resa pubblica mediante
+          pubblicazione sul sito istituzionale della Provincia di Nuoro e del MAN; in forma cartacea è messa a
+          disposizione degli utenti e di chi ne fa richiesta presso il front office.</p>
+
+        <h3>Principi fondamentali</h3>
+        <p>Il MAN, nello svolgimento delle proprie attività istituzionali, si ispira ai “principi fondamentali”
+          contenuti nella Direttiva del Presidente del Consiglio dei Ministri del 27 gennaio 1994:</p>
+
+        <i>Uguaglianza e imparzialità</i>
+        <p>I servizi sono resi sulla base del principio dell’uguaglianza garantendo a tutti i cittadini il medesimo
+          trattamento senza distinzione di nazionalità, sesso, lingua, religione, opinione politica.</p>
+
+        <i>Continuità</i>
+        <p>Il MAN garantisce continuità e regolarità nell’erogazione dei servizi. In caso di difficoltà e impedimenti si
+          impegna ad avvisare preventivamente gli utenti e ad adottare tutti i provvedimenti necessari per ridurre al
+          minimo i disagi.</p>
+
+        <i>Partecipazione</i>
+        <p>L’Istituto promuove l’informazione sulle attività svolte e, nell’operare le scelte di gestione, tiene conto
+          delle esigenze manifestate e dei suggerimenti formulati dagli utenti, in forma singola o associata.</p>
+
+        <i>Efficienza ed efficacia</i>
+        <p>Il Direttore e lo staff del MAN perseguono l’obiettivo del continuo miglioramento dell’efficienza e
+          dell’efficacia del servizio, adottando le soluzioni tecnologiche, organizzative e procedurali più funzionali
+          allo scopo.</p>
+
+        <i>Cortesia</i>
+        <p>Tutto il personale del MAN si ispira, nei confronti del pubblico, ai principi di cortesia attraverso
+          l’erogazione di servizi in modo chiaro e accessibile alle diverse fasce di pubblico.</p>
+
+        <h3>Presentazione del museo</h3>
+        <i>Condizione giuridica</i>
+        <p>Dal 1999 - anno della sua apertura al pubblico - al 2003 il MAN è stato inserito come “ufficio” nel settore
+          Cultura dell’Amministrazione Provinciale di Nuoro, con un ordinamento interno corrispondente a quello
+          dell’ente di appartenenza. Nel 2004 il Museo è diventato Istituzione della Provincia di Nuoro con autonomia
+          gestionale senza personalità giuridica.</p>
+
+        <i>Sede e storia</i>
+        <p>La prima idea di una Pinacoteca Provinciale è stata presto sostituita da quella di museo moderno. Il primo
+          nucleo della collezione, con opere provenienti da Provincia, Comune e Camera di Commercio, è stata la solida e
+          condivisa base sulla quale costruire un progetto dinamico e attento al territorio. Il MAN si trova nel centro
+          storico di Nuoro, in Via Sebastiano Satta, che si congiunge alla omonima piazza. Negli anni precedenti
+          l’apertura al pubblico, la sede attuale è stata oggetto di una ristrutturazione che ha omologato il museo agli
+          standard internazionali, secondo criteri di rigore e pulizia formale, in funzione della destinazione d’uso:
+          l’esposizione della collezione permanente, l’attività espositiva delle mostre temporanee, i servizi al
+          pubblico. La struttura si sviluppa su quattro piani (compreso il piano terra), e gli spazi sono così
+          distribuiti: al piano terra una sala espositiva per le mostre temporanee e una hall dove è stato ricavato uno
+          spazio per il servizio di accoglienza, biglietteria, vendita cataloghi e vigilanza; il primo piano con una
+          sala espositiva, quattro sale per gli uffici, un deposito; al secondo piano altre sale espositive e un
+          deposito; al terzo piano due sale espositive dedicate, generalmente, alle mostre temporanee.</p>
+
+        <p>Da alcuni anni il MAN ha iniziato un processo di riordino ed ampliamento complessivo che, partendo dalla sua
+          sede storica ed attraverso successive annessioni, lo vede configurarsi come un sistema diffuso capace di
+          intervenire quale importante interlocutore nell’organizzazione dell’area storica della città con l’obiettivo
+          di diventare una struttura polifunzionale dotata laboratori di didattica per l’educazione all’immagine; di una
+          biblioteca e di un archivio per la catalogazione dei beni artistici; dei depositi consultabili per gli
+          studiosi; di un gabinetto interno per la riproduzione fotografica delle opere; di una sezione di restauro e di
+          studio.</p>
+
+        <i>Mission</i>
+        <p>Sin dalla sua apertura, il MAN ha fatto propria la definizione dell’ICOM (International Council of Museums),
+          secondo cui il museo è una istituzione permanente, senza scopo di lucro, al servizio della società e del suo
+          sviluppo, aperta al pubblico, che compie ricerche sulle testimonianze materiali dell’uomo e del suo ambiente,
+          le acquisisce, le conserva, le comunica e soprattutto le espone a fini di studio, di educazione e di diletto.
+          Consapevole di questo ruolo, attraverso diverse proposte culturali, il MAN cerca di illustrare dibattiti
+          artistici, si interroga sul passato e sulle nuove tendenze contemporanee, costruendo attorno a ogni mostra un
+          programma di eventi. L’attività espositiva, basata sulle mostre temporanee tematiche, antologiche, personali
+          dedicate ad artisti di generazioni e movimenti artistici diversi, non trascura la rilettura della collezione
+          permanente e non si esaurisce all’interno del perimetro del museo, che incoraggia e sostiene azioni sul
+          territorio, partecipando all’organizzazione e produzione di altri progetti.</p>
+
+        <h3>Offerta culturale</h3>
+        <i>Collezione</i>
+        <p>Nata dall’accorpamento di diverse raccolte appartenute a vari Enti Pubblici di Nuoro, la collezione del MAN è
+          il risultato di un’accurata selezione di opere di artisti sardi dalla fine dell’Ottocento sino ai nostri
+          giorni. Un corpus di 700 opere che annovera i più importanti autori della storia dell’arte sarda: Antonio
+          Ballero, Giuseppe Biasi, Francesco Ciusa, Giovanni Ciusa Romagna, Mario Delitala, Carmelo Floris, Mauro Manca,
+          Costantino Nivola, Maria Lai fino a Rosanna Rossi, Vincenzo Satta, Antonio Secci e molti altri. La Collezione
+          comprende anche una significativa raccolta di disegni e ceramiche di Salvatore Fancello e l’opera grafica di
+          Giovanni Pintori. Le opere della collezione sono visibili a rotazione, di volta in volta riallestite seguendo
+          criteri differenti, con percorsi sia tematici sia dedicati a singoli autori.</p>
+
+        <i>Mostre temporanee</i>
+        <p>Attività primaria del MAN sono le mostre temporanee, a cui il museo si dedica con costanza e impegno
+          proponendosi come luogo di ricerca e comunicazione dei fenomeni più innovativi della creatività, in una
+          prospettiva culturale dinamica, in cui l’identità locale coesiste e si rafforza nel confronto con la globalità
+          del circuito artistico, anche grazie agli scambi con le collezioni di altri musei nazionali ed internazionali.
+          In linea con la sua mission il museo propone mostre dedicate ad artisti e movimenti della storia dell’arte
+          moderna e progetti rivolti ai linguaggi della più stretta contemporaneità. Ogni anno il museo propone una
+          media di quattro eventi espositivi principali più una serie di altri progetti espositivi.</p>
+
+        <i>Eventi Extra Muros</i>
+        <p>L’attività “extramuros” svolta al di fuori delle strutture architettoniche e naturali del museo attraverso
+          un’azione di avvicinamento alla società, con uno spostamento fisico dell’attività verso nuove, anche
+          temporanee, sedi. Un’azione questa che aiuta il processo di capillarizzazione e integrazione nel tessuto della
+          comunità, esorcizzando l’idea che l’arte si debba ammirarla soltanto all’interno di una sede museale e per
+          questo il MAN, oltre all’attività espositiva, offre al pubblico una serie di appuntamenti e un vasto programma
+          di eventi rivolti ai diversi target d’età, così da soddisfare una variegata richiesta culturale. In linea con
+          i suoi obbiettivi, la programmazione museale tende a aprirsi al contemporaneo senza dimenticare le tendenze
+          più classiche e storiche. La stessa Collezione permanente rispecchia questa precisa scelta.</p>
+
+        <i>Attività didattica</i>
+        <p>Il Dipartimento educativo del MAN è uno strumento al servizio di insegnanti, bambini e ragazzi, dalle scuole
+          dell’infanzia alla scuola secondaria di secondo grado. Le attività educative proposte pongono le forme
+          dell’arte contemporanea al centro dei laboratori, orientati alla sperimentazione di una didattica operativa. I
+          percorsi diventano così coinvolgenti occasioni di conoscenza e riflessione sui linguaggi e le forme dell’arte,
+          introducono a esperienze di lettura del lavoro dell’artista, suggeriscono ai docenti strategie e modelli
+          alternativi, favoriscono lo sviluppo della sensibilità, rappresentano possibilità per avviare processi
+          formativi, educativi e multidisciplinari.</p>
+
+        <p>Il dipartimento didattico inoltre prevede una serie di laboratori, collaterali ma non necessariamente
+          collegati alle mostre in corso, realizzati negli spazi del MAN oppure in altre strutture cittadine o dei paesi
+          del circondario, dal personale interno del museo in collaborazione con artisti ed esperti. Si tratta di
+          attività pensate ed elaborate per ragazzi e adulti che mirano ad ampliare la conoscenza dell’arte e a offrire
+          un supporto concettuale e documentale alle mostre del museo. I percorsi laboratoriali, variabili nei
+          contenuti, e nelle modalità di trattazione e approfondimento, in relazione alle esigenze degli utenti,
+          forniscono impulsi all’apprendimento delle nuove realtà dell’arte odierna e delle tecniche di comunicazione
+          contemporanea; suggeriscono un approccio didattico multidisciplinare; potenziano la propensione
+          all’acquisizione di nuove tecniche creative e di nuovi strumenti per la realizzazione di opere di arte
+          contemporanea; sviluppano il rapporto e l’interazione tra il pubblico e il museo. I laboratori raccontano
+          l’arte attraverso immagini, suoni e parole, utilizzando anche un linguaggio multimediale e concettuale, così
+          da consentire al fruitore la possibilità di apprendere alcuni elementi fondamentali del “fare artistico”,
+          accostandoli direttamente alle opere prese in esame, che sono presentate e analizzate all’interno del periodo
+          storico e degli avvenimenti in cui sono state concepite. Tale approccio didattico tratta l’arte con la
+          consapevolezza della sua funzione all’interno dei complessi meccanismi evolutivi della vita dell’uomo.</p>
+
+        <p>Informazioni e prenotazioni sono forniti tutte le mattine al tel. 0784.252110 oppure inviando una mail a
+          <strong>didattica@museoman.it</strong>
+        </p>
+
+        <p>Da anni il museo, attraverso i protocolli di intesa, collabora attivamente con l’ASL e la Casa circondariale
+          di Nuoro, con laboratori e conversazioni mirate.</p>
+
+        <h3>Servizi, tutela e partecipazione</h3>
+        <i>Accessibilità esterna</i>
+        <p>Il MAN è accessibile con mezzi pubblici che hanno una fermata nella vicina piazza Vittorio Emanuele; con
+          mezzi privati secondo gli orari della ZTL con diversi parcheggi pubblici a pagamento nelle vicinanze; presenza
+          di posti riservati ad auto e persone con difficoltà motoria.</p>
+
+        <i>Accessibilità interna e sicurezza</i>
+        <p>Gli spazi destinati al pubblico sono stati adeguati all’accesso dei visitatori disabili con l’abbattimento
+          delle barriere architettoniche: è disponibile un ascensore per i diversi piani oltre ai servizi igienici
+          dedicati presenti al piano terra. Sono presenti sistemi di sicurezza in tutto il museo con telecamere di
+          videosorveglianza e sistema di allarme.</p>
+
+        <i>Aperture</i>
+        <p>Il MAN è aperto al pubblico tutti i giorni, dal martedì alla domenica secondo i seguenti orari: Invernale
+          10:00 - 19:00. Estivo continuato 10:00 - 20:00. Su richiesta e per particolari esigenze è possibile l’apertura
+          anche nella giornata del lunedì. Sono inoltre previste aperture straordinarie in occasione di festività
+          nazionali o in occasione di eventi particolari. Nei suddetti casi il MAN provvede a darne comunicazione
+          preventiva attraverso i mezzi di comunicazione a sua disposizione. </p>
+
+        <i>Biglietteria</i>
+        <p>Intero 5,00 euro - Ridotto 3,00 euro (dai 18 ai 25 anni) - Gratuito under 18. Gratuito le prime domeniche del
+          mese e in occasione di alcune festività nazionali e non, previa comunicazione del museo alla collettività. Non
+          è previsto l’acquisto del biglietto on line. </p>
+
+        <i>Accoglienza</i>
+        <p>Il front office del MAN espone e distribuisce gratuitamente i comunicati stampa, il materiale informativo
+          disponibile, copia della carta dei servizi, il modulo per l’iscrizione alla mailing list. Su richiesta sono
+          disponibili i moduli di reclamo.</p>
+
+        <i>Fruizione</i>
+        <p>Escluse particolari esigenze, il MAN apre tutte le sue sale al pubblico. Quando una sala viene
+          temporaneamente chiusa, il pubblico ne è previamente informato dal personale del front-office. La prenotazione
+          per le scolaresche e i gruppi è obbligatoria. Se si richiede la visita guidata è necessaria la prenotazione.
+          In occasione degli allestimenti temporanei il museo completa il percorso espositivo attraverso l’installazione
+          di pannelli esplicativi, di volta in volta posizionati o all’esterno o all’interno delle sale, in base alle
+          diverse esigenze espositive. La riproduzione fotografica o con filmati è consentita solo per uso strettamente
+          personale e con strumenti non professionali. La riproduzione va in tutti i casi autorizzata. È possibile
+          presentare alla Direzione una domanda di autorizzazione per la riproduzione fotografica o di riprese filmate
+          dei beni esposti a scopo diverso da quello strettamente personale (tel. 0784.252110 - info@museoman.it). Il
+          MAN fa ricorso a diversi strumenti per diffondere le proprie iniziative: stampati, comunicati stampa, spot
+          televisivi, approfondimenti televisivi, spazi pubblicitari su riviste specializzate o sulla stampa locale.
+          Postazioni fisse in città, affissione (normale o 6x3) in città o sul territorio, ufficio stampa, sito web,
+          rassegna stampa cartacea e web, report annuale delle attività, profili facebook e twitter. Presso la
+          postazione del front office è allestito il bookshop con tutte le pubblicazioni e i gadget prodotti dal museo.
+        </p>
+
+        <i>Rapporti con il pubblico</i>
+        <p>È a disposizione del pubblico presso la biglietteria il modulo per iscriversi al servizio di newsletter e
+          all’indirizzario cartaceo. Inoltre è presente il modulo di Reclamo a disposizione di tutti i visitatori. </p>
+
+        <i>Carta della qualità dei servizi</i>
+        <p>La presente carta è a disposizione del pubblico presso la postazione del front office. Essa è sottoposta a un
+          aggiornamento ogni qual volta si renda necessario per intervenute modifiche ai servizi erogati.</p>
+      </div>
+    </div>
+    <div id="cataloghi" *ngIf="activatedRoute == 'cataloghi'">
+      <h1>Cataloghi</h1>
+      <div class="content">
+        <ol>
+          <li><strong>Picasso e Guernica. Genesi di un capolavoro. Contro tutte le guerre</strong>, Silvana Editoriale, 2022</li>
+          <li><strong>Giovanni Campus_Ambiente Segnico continuo</strong>, Collana I quaderni del MAN, Edizioni Solinas</li>
+          <li><strong>Mario Sironi_La madre che cuce</strong>, Collana I quaderni del MAN, Edizioni Solinas</li>
+          <li><strong>Sensorama. Lo sguardo</strong>, le cose, gli inganni. Da Magritte alla realtà aumentata. Electa</li>
+          <li><strong>Carlo Levi: Tutto il miele è finito. La Sardegna</strong>, la pittura, Allemandi editore</li>
+          <li><strong>Vittorio Accornero - Edina Altara. Gruppo di famiglia con immagini</strong>, Silvana Editoriale, 2021</li>
+          <li><strong>Sonia Leimer</strong>, Via San Gennaro, Mousse</li>
+          <li><strong>Lisetta Carmi. Voci allegre nel buio. Fotografie in Sardegna 1962-1976</strong>, Marsilio Editori, 2021</li>
+          <li><strong>Il regno segreto. Sardegna - Piemonte: una visione postcoloniale</strong>, Ilisso, 2020</li>
+          <li><strong>Anna Marongiu</strong>, Marsilio Editori, 2019</li>
+          <li><strong>Guido Guidi. In Sardegna: 1974</strong>, 2011, MACK Books</li>
+          <li><strong>Pierre Puvis de Chavannes</strong>, 2019,undefined</li>
+          <li><strong>Personnages. Maliheh Afnan</strong>, Arkadia Editore, 2019</li>
+          <li><strong>Sabir (D.Guez)</strong>, O Youth and Beauty! (W.Zimbelmann, L.Fratino</li>
+          <li><strong>La Bohème. Henri de Toulouse Lautrec e i maestri di montmartre</strong>, Silvana Editoriale, 2018</li>
+          <li><strong>L'elica e la luce. Le futuriste. 1912-1944</strong>, Officina libraria, 2018</li>
+          <li><strong>Emisferi Sud</strong>, Michele Ciacciofera, Nero Edizioni</li>
+          <li><strong>Arte contemporanea in Sardegna (1957-2017)</strong>, Magonza Editore, 2017</li>
+          <li><strong>Amore e Rivoluzione. Coppie di artisti dell’avanguardia russa</strong>, Silvana Editoriale, 2017</li>
+          <li><strong>Berenice Abbott. Topographies</strong>, Steidl, 2017</li>
+          <li><strong>Soggettivo primordiale</strong>, Magonza editore, 2016</li>
+          <li><strong>Ettore Favini. Arrivederci</strong>, Humboldt Books, 2016</li>
+          <li><strong>Roman Signer. Un passo verso il mare</strong>, Humboldt Books, 2016</li>
+          <li><strong>Cristian Chironi. My House is Le Courbusier/Broken English</strong>, Nero, 2015</li>
+          <li><strong>Paul Klee. Mondi animati</strong>, Magonza Editore, 2015</li>
+          <li><strong>Vivian Maier. Una fotografa ritrovata</strong>, Contrasto, 2015</li>
+          <li><strong>Thomas Hirschhorn. 3 “Easycollage” and 6 “Collage-Truth”</strong>, MAN, 2015</li>
+          <li><strong>Canto di strada</strong>, NERO, 2015 </li>
+          <li><strong>Antonio Rovaldi</strong>, Orizzonte in Italia, Humboldt Books</li>
+          <li><strong>Passo a due</strong>, NERO, 2014 </li>
+          <li><strong>Maria Lai. Ricucire il mondo</strong>, Silvana Editoriale, 2015</li>
+          <li><strong>Alberto Giacometti. A un passo dal tempo</strong>, Silvana Editoriale, 2014</li>
+          <li><strong>Robert Capa. Una vita leggermente fuori fuoco</strong>, Contrasto, 2014</li>
+          <li><strong>Laura Pugno. Altri sensi</strong>, NERO, 2013</li>
+          <li><strong>Braccia</strong>, Mousse Publishing, 2013 </li>
+          <li><strong>La galassia di Arp</strong>, Silvana Editoriale, 2013 </li>
+          <li><strong>The Camera’s Blind Spot</strong>, NERO, 2013 </li>
+          <li><strong>Gavino Tilocca. Ceramiche</strong>,  Eikon, 2013</li>
+          <li><strong>Marino Marini. Cavalli e cavalieri</strong>, Silvana Editoriale, 2012</li>
+          <li><strong>Werner Bischof in Sardegna 1950</strong>, Imago, 2012</li>
+          <li><strong>Assolo #1. Luciano Secci. Catalogo dell’esistenza</strong>, MAN, 2012</li>
+          <li><strong>DNA</strong>, MAN, 2011</li>
+          <li><strong>L’evento immobile. Sfogliare il tempo</strong>, Settore 8 edizioni, 2011 </li>
+          <li><strong>Dreamtime. Lo spirito dell’arte aborigena</strong>, Marsilio, 2011</li>
+          <li><strong>Entretiempos. Nel frattempo</strong>, istanti, intervalli</li>
+          <li><strong>Emanuele Becheri. Hauntology</strong>, MAN, 2010</li>
+          <li><strong>Capolavori del ’900 italiano</strong>, MAN, 2010</li>
+          <li><strong>Anni ’70. Fotografia e vita quotidiana</strong>, Silvana Editoriale, 2009</li>
+          <li><strong>Fabrizio De André. La mostra</strong>, Silvana Editoriale, 2009</li>
+          <li><strong>Pastorello. Salve Maria</strong>, MAN, 2009</li>
+          <li><strong>Mark Lewis</strong>, Silvana Editoriale, 2009</li>
+          <li><strong>Antonio Secci</strong>, MAN, 2008</li>
+          <li><strong>Elisabetta Benassi</strong>, Suolo 2007, Silvana Editoriale</li>
+          <li><strong>Josephine Sassu</strong>, MAN, 2008</li>
+          <li><strong>Aldo Contini</strong>, MAN, 2008</li>
+          <li><strong>Man Ray</strong>, Unconcerned but not indiferent, Silvana Editoriale</li>
+          <li><strong>Mirella Mibelli</strong>, MAN, 2008</li>
+          <li><strong>Wanda Nazzari</strong>, MAN, 2008</li>
+          <li><strong>L’evento immobile. Incantamenti</strong>, MAN, 2008 </li>
+          <li><strong>Marc Chagall</strong>, MAN, 2008</li>
+          <li><strong>Sala 1. Cruel Fairy Tales</strong>, MAN, 2008</li>
+          <li><strong>Egon Schiele</strong>, MAN, 2007</li>
+          <li><strong>Il luogo ideale. Il paesaggio simbolista in Francia</strong>, MAN, 2007 </li>
+          <li><strong>Confini – Boundaries</strong>, Silvana Editoriale, 2007 </li>
+          <li><strong>Dalla figuratività all’astrazione. Percorsi dell’arte italiana tra il 1945 e il 1960 della collezione della Galleria Nazionale Moderna</strong>, Silvana Editoriale, 2006</li>
+          <li><strong>D’Ombra</strong>, Silvana Editoriale, 2006 </li>
+          <li><strong>Transavanguardia. Opere dalla Collezione Grassi</strong>, MAN, 2006 </li>
+          <li><strong>Tra Realismo e Avanguardia. Un percorso nell’Impressionismo russo</strong>, MAN, 2006 </li>
+          <li><strong>Modern Times. Voll. 1&2</strong>, MAN, 2006 </li>
+          <li><strong>(In)visibile (In)corporeo</strong>, MAN, 2005 </li>
+          <li><strong>BYO. Bring Your Own</strong>, MAN, 2005 </li>
+          <li><strong>Donne</strong>, 30 ritratti tra passato e futuro, Tam tam</li>
+          <li><strong>’50 ’60. 17 artisti e 40 capolavori dalle collezioni della Galleria d’Arte Moderna di Roma</strong>, MAN, 2005 </li>
+          <li><strong>DNA. Dal Novecento ad oggi (La collezione del MAN)</strong>, MAN, 2005</li>
+          <li><strong>Videoreport Italia 2004-2005</strong>, Silvana Editoriale, 2005 </li>
+          <li><strong>Italia Quotidiana. Dipinti e sculture dagli anni ‘20 agli anni ‘40</strong>, MAN, 2004 </li>
+          <li><strong>Aligi Sassu</strong>, MAN, 2004</li>
+          <li><strong>Catastrofi Minime</strong>, MAN, 2004 </li>
+          <li><strong>Ugo Mulas. Dentro la fotografia</strong>, MAN, 2004</li>
+          <li><strong>One Man Show</strong>, MAN, 2004 </li>
+          <li><strong>Giovanni Pintori</strong>, MAN, 2003</li>
+          <li><strong>Erwin Olaf. Booby trap</strong>, MAN, 2003</li>
+          <li><strong>Picasso. Suite Vollard</strong>, MAN, 2003</li>
+          <li><strong>Quattro secoli di pittura andalusa</strong>, MAN, 2002</li>
+          <li><strong>Casa dolce casa</strong>, MAN, 2002</li>
+          <li><strong>Maria Lai. Come un gioco</strong>, MAN, 2002</li>
+          <li><strong>Vis à vis. Autoritrarsi d’artista</strong>, MAN, 2002 </li>
+          <li><strong>Paco Cao. Ignoto</strong>, sono il frutto della tua fantasia, MAN</li>
+          <li><strong>Mirò</strong>, Orizzonte lirico, pittura</li>
+          <li><strong>Pay Attenti[on] Please</strong>, Skira, 2001 </li>
+          <li><strong>Giorgio Morandi. I Fiori</strong>, Skira, 2001</li>
+          <li><strong>Manovre 01</strong>, MAN, 2001 </li>
+          <li><strong>Luigi Veronesi</strong>, MAN, 2000</li>
+          <li><strong>Manovre 00</strong>, MAN, 2000 </li>
+          <li><strong>Giovanni Campus</strong>, MAN, 2000</li>
+          <li><strong>Sandy Skoglund</strong>, MAN, 2000</li>
+          <li><strong>Thorsten Kirchhoff</strong>, MAN, 2000</li>
+          <li><strong>Marco Cingolani</strong>, MAN, 2000</li>
+          <li><strong>Eduardo Chillida</strong>, Dal sublime…, MAN</li>
+          <li><strong>Frogheri</strong>, Antologica, MAN</li>
+          <li><strong>100 capolavori della collezione del Vitra Design Museum</strong>, Skira, 1999</li>
+          <li><strong>Bruno Munari</strong>, MAN, 1999</li>
+          <li><strong>Matteo Basilé</strong>, MAN, 1999</li>
+          <li><strong>Daniele Galliano</strong>, MAN, 1999</li>
+          <li><strong>Vincenzo Satta. L’impalpabile luce della pittura</strong>, MAN, 1999 </li>
+          <li><strong>Antonio Secci. Nel corpo della materia</strong>, MAN, 1999  </li>
+          <li><strong>Collezione MAN</strong>, MAN, 1999</li>
+        </ol>
+      </div>
+    </div>
+  </main>

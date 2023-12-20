@@ -1,0 +1,69 @@
+.dataPar{
+  color: #000;
+font-size: 24px;
+font-family: Inter;
+}
+.fontePar{
+  color: #000;
+  font-size: 24px;
+  font-family: Inter;
+}
+.caricaPar{
+  color: #000;
+  font-size: 24px;
+  font-family: Inter;
+}
+.nomePar{
+  color: #000;
+  font-size: 36px;
+  font-family: Inter;
+}
+.cognomePar{
+  color: #000;
+font-size: 48px;
+font-family: Inter;
+font-weight: 600;
+}
+
+.hmain{
+  padding-left: 8vh;
+}
+section{
+  padding-left: 8vh;
+  padding-right: 8vh;
+}
+
+.frontImage{
+  width: 100%;
+  height: 35vh;
+
+}
+
+.grid {
+  display: grid;
+  // two column two row grid
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  grid-gap: 0px;
+}
+
+
+@media (max-width: 480px) {
+  .hmain{
+    padding-left: 1vh;
+  }
+
+  section{
+    padding-left: 1vh;
+    padding-right: 1vh;
+  }
+
+  .grid{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    grid-gap: 0px;
+  }
+
+
+}

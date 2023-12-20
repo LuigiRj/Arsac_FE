@@ -1,0 +1,13 @@
+<mat-card (click)="navigate('pubblicazione')" class="example-card">
+  <mat-card-header>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-grid-list class="cardTile" [ngStyle]="{'background': ' url(' + imageUrl  + ') no-repeat 0 0'}" cols="2" rows="1" rowHeight="1:1">
+      <mat-grid-tile colspan="1"  rowspan="1"></mat-grid-tile>
+      <mat-grid-tile class="textTile" colspan="1"  rowspan="1"><p class="nomePar">Nome</p><p class="cognomePar">Cognome</p><p class="annoPar">Anno</p></mat-grid-tile>
+
+    </mat-grid-list>
+
+
+  </mat-card-content>
+</mat-card>

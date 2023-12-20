@@ -1,0 +1,53 @@
+mat-form-field {
+  width: 100%;
+}
+.allegati {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.area_allegati {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.nome_allegato {
+  width: 200px;
+  height: auto;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+// .nome {
+//   width: 200px;
+//   height: auto;
+//   margin: 30px;
+// }
+
+.export-pdf {
+  position: fixed;
+  bottom: 60px;
+  right: 30px;
+  z-index: 2;
+}
+
+.mat-panel-title,
+.mat-expansion-panel-header,
+.mat-expansion-panel-header-description,
+.mat-expansion-panel-header-title,
+.mat-expansion-indicator::after {
+  color: #212427;
+}
+
+.error {
+  color: red !important;
+  font-weight: bolder;
+}
+

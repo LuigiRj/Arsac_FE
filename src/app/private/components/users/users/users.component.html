@@ -1,0 +1,153 @@
+<div class="content-card">
+
+  <form [formGroup]="searchForm" class="py-12">
+    <div fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutGap="10px" fxLayoutGap.lt-md="0">
+      <mat-form-field fxFlex>
+        <input formControlName="firstName" matInput placeholder="Nome">
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input formControlName="lastName" matInput placeholder="Cognome">
+      </mat-form-field>
+
+      <mat-form-field fxFlex>
+        <input formControlName="codiceFiscale" matInput placeholder="Codice fiscale">
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input formControlName="email" matInput placeholder="E-mail">
+      </mat-form-field>
+      <div fxFlex="70px">
+        <mat-checkbox class="my-8" formControlName="attivo">Attivo</mat-checkbox>
+      </div>
+      <div fxFlex="144px">
+        <button mat-raised-button (click)="search()" class="mt-4 mx-4"  aria-label="Cerca">
+          <mat-icon class="mat-24">search</mat-icon>
+        </button>
+        <button mat-raised-button (click)="clear()" class="mt-4 mx-4"  aria-label="Reset">
+          <mat-icon class="mat-24">clear</mat-icon>
+        </button>
+      </div>
+    </div>
+
+  </form>
+
+  <div class="mat-elevation-z8 mt-20">
+    <mat-table #table [dataSource]="dataSource" class="table-condensed" matSort>
+      <ng-container matColumnDef="id">
+        <mat-header-cell fxFlex="74px" *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
+        <mat-cell fxFlex="74px" *matCellDef="let row">{{ row.id }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="firstName">
+        <mat-header-cell fxFlex *matHeaderCellDef mat-sort-header>Nome</mat-header-cell>
+        <mat-cell fxFlex *matCellDef="let row">{{ row.firstName }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="lastName">
+        <mat-header-cell fxFlex *matHeaderCellDef mat-sort-header>Cognome</mat-header-cell>
+        <mat-cell fxFlex *matCellDef="let row">{{ row.lastName }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="codiceFiscale">
+        <mat-header-cell fxFlex *matHeaderCellDef mat-sort-header>Codice Fiscale</mat-header-cell>
+        <mat-cell fxFlex *matCellDef="let row">{{ row.codiceFiscale }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <mat-header-cell fxFlex *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
+        <mat-cell fxFlex *matCellDef="let row">{{ row.email }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="attivo">
+        <mat-header-cell fxFlex *matHeaderCellDef mat-sort-header>Attivo</mat-header-cell>
+        <mat-cell fxFlex *matCellDef="let row">{{ (row.attivo ? 'Si' : 'No' )}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="ruoli">
+        <mat-header-cell fxFlex *matHeaderCellDef mat-header>Ruoli</mat-header-cell>
+        <mat-cell fxFlex *matCellDef="let row">
+          <span *ngFor="let a of row.roles">
+            {{ a.codice }}
+          </span>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="dettagli">
+        <mat-header-cell fxFlex="80px" *matHeaderCellDef>Dettagli</mat-header-cell>
+        <mat-cell fxFlex="80px" fxLayoutGap="4px" *matCellDef="let row">
+          <button mat-raised-button (click)="edit(row)" class="colorPrimary"  aria-label="Seleziona">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *cdkRowDef="let row; columns: displayedColumns;"></mat-row>
+
+    </mat-table>
+
+    <div class="empty-table" *ngIf="dataSource.data.length===0">
+      Nessun elemento presente. Per iniziare compila il form di ricerca
+    </div>
+
+    <mat-paginator [pageSizeOptions]="[25, 50, 100]"> </mat-paginator>
+  </div>
+</div>
+<ng-template #detailsModal let-data>
+  <mat-dialog-content class="mat-typography">
+    <h2 *ngIf="editItem && editItem.id" mat-dialog-title>Modifica Utente</h2>
+    <h2 *ngIf="editItem && !editItem.id" mat-dialog-title>Nuovo Utente</h2>
+    <form [formGroup]="editItemForm">
+      <div fxLayout="row wrap" fxLayoutGap="12px">
+        <mat-form-field fxFlex="calc(33% - 12px)">
+          <input required formControlName="firstName" matInput placeholder="Nome">
+        </mat-form-field>
+        <mat-form-field fxFlex="calc(33% - 12px)">
+          <input required formControlName="lastName" matInput placeholder="Cognome">
+        </mat-form-field>
+        <mat-form-field fxFlex="calc(33% - 12px)">
+          <input required formControlName="codiceFiscale" matInput placeholder="Codice fiscale">
+        </mat-form-field>
+        <mat-form-field fxFlex="calc(33% - 12px)">
+          <input required formControlName="email" matInput placeholder="E-mail">
+        </mat-form-field>
+        <div fxFlex="100%">
+          <br />
+          <strong>Ruoli</strong>
+          <br />
+          <br />
+          <mat-chip-list #chipList aria-label="Role selection">
+            <mat-chip *ngFor="let r of editItem.roles" selectable removable (removed)="removeRole(r)">
+              {{ r.descrizione }}
+              <button matChipRemove>
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </mat-chip>
+          </mat-chip-list>
+          <span *ngIf="!editItem.roles.length">Nessuna ruolo assegnato</span>
+        </div>
+        <div fxFlex="100%"><br /><br /></div>
+        <mat-form-field fxFlex="calc(50% - 12px)">
+          <mat-label>Aggiungi Ruolo</mat-label>
+          <input matInput [formControl]="addRoleControl" [matAutocomplete]="autoRuolo">
+          <mat-autocomplete #autoRuolo="matAutocomplete">
+            <mat-option *ngFor="let option of ruoliDataSource | async" [value]="option.descrizione"
+              (onSelectionChange)="addRole(option)">
+              {{option.descrizione}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-raised-button (click)="save()">Salva</button>
+    <button mat-raised-button (click)="delete()">Elimina</button>
+    <button mat-raised-button mat-dialog-close>Chiudi</button>
+  </mat-dialog-actions>
+</ng-template>
+
+<div class="new-item">
+  <button mat-fab class="colorPrimary" aria-label="Inserisci nuovo utente" (click)="new()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

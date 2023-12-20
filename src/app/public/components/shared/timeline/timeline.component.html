@@ -1,0 +1,166 @@
+<div fxLayout="row wrap">
+  <mat-form-field [formGroup]="searchForm" fxFlex="100%">
+    <mat-label>Seleziona una scheda</mat-label>
+    <input matInput formControlName="opera" [matAutocomplete]="autoScheda">
+    <mat-autocomplete #autoScheda="matAutocomplete" [displayWith]="utilsService.displayEntity"
+      (optionSelected)="selected($event)">
+      <mat-option *ngFor="let u of schedeDataSource | async" [value]="u">
+        {{ u }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</div>
+
+<ng-container *ngIf="operaSelected">
+  <div fxLayout="row wrap">
+    <div fxFlex="100%">
+      <h1>Cronologia dell'opera: {{ operaSelected._source.__denominazione }}</h1>
+    </div>
+    <div class="container" fxFlex="100" FxLayout="row" FxLayoutAlign="center center">
+      <div class="timeline-wrapper" *ngIf="operaSelected">
+        <div class="timeline">
+          <div class="outer">
+            <ng-container *ngFor="let event of events; let i = index; let last = last">
+              <div class="card">
+                <span class="title" [attr.data]="event.data | date"></span>
+                <div class="info">
+                  <div class="header_timeline">
+                    <h3
+                      [ngStyle]="{'transform': last ? 'translate(-145px, 8px)' : !['Spostamento', 'Restauro', 'Restituzione', 'Uscita', 'Monitoraggio'].includes(events[i].tipo_timeline)  ? 'translate(-145px, -0px);' : 'translate(-15px, 3px)'}">
+                      <span *ngIf="privato; else nonCliccabile" class="hover-timeline"
+                        [class.restauro]="events[i].tipo_timeline == 'Restauro'"
+                        [class.arrivo]="events[i].tipo_timeline == 'Arrivo'"
+                        [class.iniziale]="events[i].tipo_timeline == 'Inizio'"
+                        [class.altro]="events[i].tipo_timeline == 'Altro'"
+                        [class.spostamento]="events[i].tipo_timeline == 'Spostamento'"
+                        [class.monitoraggio]="events[i].tipo_timeline == 'Monitoraggio'"
+                        [class.uscita]="events[i].tipo_timeline == 'Uscita'"
+                        [class.restituzione]="events[i].tipo_timeline == 'Restituzione'"
+                        [class.furto]="events[i].tipo_timeline == 'Furto' || events[i].tipo_timeline == 'uscita'"
+                        [class.last]="last" (click)="edit(event)" matTooltip="Descrizione: {{event.descrizione}}"
+                        #tooltip="matTooltip" aria-label="Modifica">
+                        {{ event.tipo_timeline }}
+                      </span>
+                      <ng-template #nonCliccabile>
+                        <span>{{ event.tipo_timeline }}</span>
+                      </ng-template>
+                    </h3>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+          <div class="add_timeline" *ngIf="privato">
+            <button class="colorPrimary rounded inizio center" mat-raised-button (click)="new()">
+              Aggiungi timeline
+            </button>
+          </div>
+          <div class="default-timeline" *ngIf="!privato">
+            <button class="colorPrimary rounded inizio">
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="new-item">
+    <button mat-fab class="colorPrimary" title="Inserisci nuova opera" aria-label="Inserisci una nuova opera"
+      (click)="new()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+</ng-container>
+
+<ng-template #detailsModal let-data>
+  <mat-dialog-content class="mat-typography">
+    <h2 *ngIf="timeline && timeline.id" mat-dialog-title>Dettagli Evento - {{ timeline.tipo_timeline }}</h2>
+    <h2 *ngIf="timeline && !timeline.id" mat-dialog-title>Nuovo Evento</h2>
+    <form [formGroup]="editItem">
+      <div fxLayout="row wrap" fxLayoutGap="12px">
+        <mat-form-field fxFlex="calc(50% - 12px)">
+          <mat-select [required]="true" formControlName="tipo_timeline" placeholder="Tipo timeline">
+            <mat-option *ngFor="let tipo of tipiTimeline" [value]="tipo">
+              {{ tipo }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field fxFlex="calc(50%  - 12px)">
+          <input [required]="true" formControlName="data" matInput [matDatepicker]="picker" placeholder="Data">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field fxFlex="calc(50% - 12px)">
+          <input [required]="true" formControlName="descrizione" matInput placeholder="Descrizione">
+        </mat-form-field>
+        <ng-container *ngIf="editItem.get('tipo_timeline')?.value === 'Monitoraggio'">
+          <mat-form-field fxFlex="calc(33% - 12px)">
+            <input rows="4" required formControlName="stato_conservazione" matInput
+              placeholder="Stato di conservazione">
+          </mat-form-field>
+          <mat-form-field fxFlex="calc(33% - 12px)">
+            <input rows="4" formControlName="tipologia_danno" matInput placeholder="Tipologia del danno">
+          </mat-form-field>
+          <mat-form-field fxFlex="calc(33% - 12px)">
+            <input rows="4" formControlName="origine_del_danno" matInput placeholder="Origine del danno">
+          </mat-form-field>
+          <mat-form-field fxFlex="calc(100% - 12px)">
+            <textarea rows="4" formControlName="operazioni_consigliate" matInput placeholder="Operazioni consigliate">
+            {{editItem.controls.operazioni_consigliate.value}}
+          </textarea>
+          </mat-form-field>
+        </ng-container>
+        <ng-container *ngIf="editItem.get('tipo_timeline')?.value === 'Spostamento'">
+          <mat-form-field fxFlex="33%">
+            <input matInput required formControlName="to" placeholder="Destinazione" [matAutocomplete]="autoSala">
+            <mat-autocomplete #autoSala="matAutocomplete" [displayWith]="utilsService.displayEntity">
+              <mat-option *ngFor="let u of saleDataSource | async" [value]="u">
+                {{ u }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </ng-container>
+      </div>
+      <!-- ngx upload -->
+      <div
+        *ngIf="editItem.controls.tipo_timeline.value && editItem.controls.data.value && editItem.controls.descrizione.value">
+        <h2 class="allegati">Allegati</h2>
+        <div class="ngx_upload">
+          <ngx-upload [multiple]="true" [asDialog]="false" (afterUpload)="handleUpload($event)"
+            (afterError)="handleUploadError($event)" [metadata]="metadata"></ngx-upload>
+        </div>
+      </div>
+      <ng-container *ngIf="editItem.controls.allegati.value">
+        <div class="" *ngFor="let a of editItem.controls.allegati.value">
+          <div class="area_allegati">
+            <div class="nome_allegato">
+              {{ getNomeFile(a) }}
+            </div>
+            <div class="btnAllegati">
+              <button mat-raised-button (click)="deleteFile(a)" *ngIf="editItem.enabled">
+                <mat-icon>remove_circle_outline</mat-icon>
+              </button>
+              <button class="download" mat-raised-button (click)="downloadFile(a)" *ngIf="editItem.enabled">
+                <mat-icon>download</mat-icon>
+              </button>
+              <hr>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-raised-button (click)="addEvent()" [disabled]="!editItem.valid">Salva</button>
+    <button mat-raised-button (click)="delete(timeline.id)" *ngIf="timeline && timeline.id">Elimina</button>
+    <button mat-raised-button mat-dialog-close>Chiudi</button>
+  </mat-dialog-actions>
+</ng-template>
+
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />

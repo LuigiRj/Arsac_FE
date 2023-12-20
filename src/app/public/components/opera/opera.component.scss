@@ -1,0 +1,165 @@
+.opera-background {
+  position: fixed;
+  background-repeat: no-repeat;
+  top: 0;
+  left: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.1;
+  filter: blur(1px);
+  width: 100% !important;
+  height: 100% !important;
+  z-index: -1;
+}
+
+h1 {
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 10px;
+  margin-top: -10px;
+}
+
+.main-grid {
+  padding: 20px;
+  border-radius: 20px;
+
+  // display: flex;
+  // flex-wrap: wrap;
+  // align-items: flex-start;
+  // justify-content: center;
+  // width: 100%;
+  // height: 100%;
+  // overflow-y: visible;
+}
+
+.left-dettaglio {
+  width: 33.33% !important;
+  display: flex;
+  justify-content: center;
+  // overflow-y: auto;
+  // background-color: white;
+
+  height: 400px;
+  overflow-y: visible;
+
+  mat-card {
+    height: 350px;
+    width: 250px;
+    overflow-y: hidden;
+    box-shadow: 0 0px 30px 1px #222;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+
+.right-dettaglio {
+  width: 33.33% !important;
+  display: flex;
+  justify-content: center;
+}
+
+.center-dettaglio {
+  width: 33.33% !important;
+  display: flex;
+  justify-content: center;
+  overflow-x: visible;
+  overflow-y: visible;
+  object-fit: cover;
+  height: 400px;
+  padding-top: 20px;
+  z-index: 1;
+  &:hover {
+    cursor: pointer;
+    opacity: 0.9;
+  }
+
+}
+
+.img-dettaglio {
+  width: auto;
+  max-height: 350px;
+  box-shadow: 0 0px 10px 1px #222;
+  overflow-y: visible;
+
+}
+
+.right-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 350px;
+  width: 250px;
+  box-shadow: 0 0px 30px 1px #222;
+  padding-left: 30px;
+  padding-right: 30px;
+
+  hr {
+    color: var(--primary);
+    width: 100%;
+    background-color: var(--primary);
+    fill: var(--primary);
+    height: 3px;
+  }
+}
+
+h3 {
+  text-align: center;
+}
+
+.timeline-y {
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 350px;
+}
+
+.container-text {
+  display: flex;
+  margin-top: 30px;
+  padding: 40px;
+  justify-content: center;
+  margin-bottom: 100px;
+}
+
+strong,
+h3 {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  width: 100%;
+  height: 100%;
+  h3 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+  p {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+}
+
+.add-button {
+  position: fixed;
+  bottom: 60px;
+  right: 40px;
+  z-index: 100;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  padding: 10px;
+  cursor: pointer !important;
+
+  * {
+    cursor: pointer !important;
+  }
+}
+
+.mat-button.add-button {
+  cursor: pointer !important;
+}

@@ -1,0 +1,89 @@
+<div class="content-card">
+  <form [formGroup]="searchForm" class="py-12">
+    <div fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutGap="10px" fxLayoutGap.lt-md="0">
+      <mat-form-field fxFlex>
+        <input formControlName="descrizione" matInput placeholder="Nome ruolo">
+      </mat-form-field>
+      <div fxFlex="144px">
+        <button mat-raised-button (click)="search()" class="mt-4 mx-4"  aria-label="Cerca">
+          <mat-icon class="mat-24">search</mat-icon>
+        </button>
+        <button mat-raised-button (click)="clear()" class="mt-4 mx-4"  aria-label="Reset">
+          <mat-icon class="mat-24">clear</mat-icon>
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <div class="mat-elevation-z8 mt-20">
+    <mat-table #table [dataSource]="dataSource" class="table-condensed" matSort>
+      <ng-container matColumnDef="id">
+        <mat-header-cell fxFlex *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
+        <mat-cell fxFlex *matCellDef="let row">{{row.id}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="descrizione">
+        <mat-header-cell fxFlex *matHeaderCellDef mat-sort-header>Nome ruolo</mat-header-cell>
+        <mat-cell fxFlex *matCellDef="let row">{{row.descrizione}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="codice">
+        <mat-header-cell fxFlex *matHeaderCellDef mat-sort-header>Codice</mat-header-cell>
+        <mat-cell fxFlex *matCellDef="let row">{{row.codice}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="dettagli">
+        <mat-header-cell fxFlex="80px" *matHeaderCellDef>Dettagli</mat-header-cell>
+        <mat-cell fxFlex="80px" fxLayoutGap="4px" *matCellDef="let row">
+          <button mat-raised-button (click)="edit(row)" class="colorPrimary"  aria-label="Seleziona">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *cdkRowDef="let row; columns: displayedColumns;"></mat-row>
+
+    </mat-table>
+    <div class="empty-table" *ngIf="dataSource.data.length===0">
+      Nessun elemento presente. Per iniziare compila il form di ricerca
+    </div>
+
+    <mat-paginator [pageSizeOptions]="[25, 50, 100]"> </mat-paginator>
+  </div>
+</div>
+
+<div class="new-item">
+  <button mat-fab class="colorPrimary" aria-label="Inserisci nuova Richiesta" (click)="new()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+
+<ng-template #detailsModal let-data>
+  <mat-dialog-content class="mat-typography">
+    <h2 *ngIf="editItem && !editItem.id" mat-dialog-title>Inserisci Nuovo ruolo</h2>
+    <h2 *ngIf="editItem && editItem.id" mat-dialog-title>Modifica ruolo: {{editItem.descrizione}}</h2>
+    <form [formGroup]="editItemForm">
+      <div fxLayout="row wrap" fxLayoutGap="12px">
+        <mat-form-field fxFlex="calc(100% - 12px)">
+          <input formControlName="descrizione" matInput placeholder="Nome ruolo" required>
+        </mat-form-field>
+        <mat-form-field fxFlex="calc(100% - 12px)">
+          <mat-label>Permessi</mat-label>
+          <mat-select multiple formControlName="grants">
+            <mat-option *ngFor="let a of grantsDataSource" [value]="a">
+              {{ a }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field fxFlex="calc(100% - 12px)">
+          <input formControlName="codice" matInput placeholder="Codice" required>
+        </mat-form-field>
+      </div>
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-raised-button (click)="save()">Salva</button>
+    <button mat-raised-button (click)="delete()">Elimina</button>
+    <button mat-raised-button mat-dialog-close>Chiudi</button>
+  </mat-dialog-actions>
+</ng-template>

@@ -1,0 +1,52 @@
+<div class="container-news" fxLayout="column" fxLayout.xs="column" fxLayout.sm="column">
+  <main fxFlex>
+    <app-breadcrumbs [breadcrumbs]="[{label: 'Home', url: '/'}, {label: 'Storia', url: '/public'}]"></app-breadcrumbs>
+    <h1 class="hmain">{{title}}</h1>
+    <mat-divider></mat-divider>
+    <section class="search">
+    <!--<h3 class="primary">Ricerca news</h3>-->
+    <form [formGroup]="searchForm" fxLayout="column">
+      <!--<mat-form-field appearance="fill">
+        <mat-label>Titolo</mat-label>
+        <input matInput formControlName="titolo" placeholder="Titolo">
+      </mat-form-field>-->
+      <mat-form-field appearance="fill">
+        <mat-label>Ricerca</mat-label>
+        <input matInput formControlName="testo" placeholder="Corpo del cenno storico">
+        <mat-icon (click)="search()" matSuffix>search</mat-icon>
+      </mat-form-field>
+    </form>
+    <div class="actions">
+       <!--<button mat-raised-button color="primary" (click)="reset()">Reset</button>
+      <button mat-raised-button color="primary" (click)="search()">Cerca</button>-->
+    </div>
+
+  </section>
+  <mat-divider></mat-divider>
+    <section class="title">
+      <h1>[ NEWS ]</h1>
+      <div class="sorting">
+        <mat-form-field>
+          <mat-label>Ordina per</mat-label>
+          <mat-select name="Ordina" id="select" (selectionChange)="sortBy($event)" matNativeControl [value]="'desc'">
+            <mat-option value="asc">Crescente</mat-option>
+            <mat-option value="desc">Descrescente</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </section>
+    <div>
+      <div fxLayout="row wrap" matSort>
+        <div fxFlex="33" fxFlex.xs="0 0 100%" fxFlex.sm="0 0 50%" fxFlex.md="0 0 50%" fxFlex.lg="0 0 33%" *ngFor="let news of news.data" fxLayoutAlign="start stretch">
+          <app-card-news [news]="news"></app-card-news>
+        </div>
+      </div>
+      <div class="empty-table" *ngIf="news.data.length===0">
+        Nessun elemento presente. Per iniziare compila il form di ricerca
+      </div>
+    </div>
+    <mat-paginator [pageSizeOptions]="[9, 50, 100]"> </mat-paginator>
+  </main>
+</div>
+
+<div class=""></div>

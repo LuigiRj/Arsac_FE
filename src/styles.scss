@@ -1,0 +1,315 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import "@angular/material/theming";
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$app-primary: mat-palette($mat-green);
+$app-accent: mat-palette($mat-green, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$app-warn: mat-palette($mat-red);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+//@include angular-material-theme($app-theme);
+@import "@fontsource/titillium-web";
+@import './theme.scss';
+
+/* You can add global styles to this file, and also import other style files */
+html,
+body {
+  min-height: 100vh;
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Titillium Web', Roboto, "Helvetica Neue", sans-serif;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.empty-table {
+  padding: 15px;
+  text-align: center;
+}
+
+.new-item {
+  position: fixed;
+  bottom: 60px;
+  right: 30px;
+  z-index: 2;
+}
+
+button {
+  cursor: pointer !important;
+}
+
+.simple-notification-wrapper {
+  z-index: 99999999999999999999 !important;
+}
+
+#loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+@for $i from 0 through 10 {
+  .w-#{$i}0 {
+    width: $i * 10% !important;
+  }
+}
+
+.float-right {
+  float: right !important;
+}
+
+@each $prop,
+$abbrev in (margin: m, padding: p) {
+  @for $i from 0 through 10 {
+    $size: $i * 4;
+    $length: $size * 1px;
+
+    .#{$abbrev}-#{$size} {
+      #{$prop}: $length  !important;
+    }
+
+    .#{$abbrev}t-#{$size},
+    .#{$abbrev}y-#{$size} {
+      #{$prop}-top: $length  !important;
+    }
+
+    .#{$abbrev}r-#{$size},
+    .#{$abbrev}x-#{$size} {
+      #{$prop}-right: $length  !important;
+    }
+
+    .#{$abbrev}b-#{$size},
+    .#{$abbrev}y-#{$size} {
+      #{$prop}-bottom: $length  !important;
+    }
+
+    .#{$abbrev}l-#{$size},
+    .#{$abbrev}x-#{$size} {
+      #{$prop}-left: $length  !important;
+    }
+  }
+
+  @for $i from 1 through 10 {
+    $size: $i * 4;
+    $length: $size * 1px;
+
+    @if $size  !=0 {
+      .m-n#{$size} {
+        margin: -$length  !important;
+      }
+
+      .mt-n#{$size},
+      .my-n#{$size} {
+        margin-top: -$length  !important;
+      }
+
+      .mr-n#{$size},
+      .mx-n#{$size} {
+        margin-right: -$length  !important;
+      }
+
+      .mb-n#{$size},
+      .my-n#{$size} {
+        margin-bottom: -$length  !important;
+      }
+
+      .ml-n#{$size},
+      .mx-n#{$size} {
+        margin-left: -$length  !important;
+      }
+    }
+  }
+}
+
+.m-auto {
+  margin: auto !important;
+}
+
+.mt-auto,
+.my-auto {
+  margin-top: auto !important;
+}
+
+.mr-auto,
+.mx-auto {
+  margin-right: auto !important;
+}
+
+.mb-auto,
+.my-auto {
+  margin-bottom: auto !important;
+}
+
+.ml-auto,
+.mx-auto {
+  margin-left: auto !important;
+}
+
+.mat-tab-header {
+  margin-bottom: 12px;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.table {
+  border: 1px solid #eee;
+
+  th {
+    padding: 4px 0;
+  }
+}
+
+.mat-dialog-content {
+  padding-top: 5px !important;
+  padding-bottom: 5px !important;
+}
+
+.link {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.new {
+  width: 0px;
+
+  &::after {
+    content: '';
+    height: 6px;
+    width: 6px;
+    border-radius: 3px;
+    display: block;
+    background-color: var(--warn-color);
+    transform: translateX(-10px);
+  }
+}
+
+ul.file-list {
+  li:not(.no-files) {
+    cursor: pointer;
+  }
+}
+
+.mat-input-element:disabled,
+.mat-form-field-type-mat-native-select.mat-form-field-disabled .mat-form-field-infix::after,
+.mat-select-disabled .mat-select-value {
+  color: #00761a;
+
+}
+
+.required-field {
+  color: red;
+}
+
+:root {
+  --porpora: #B80000;
+  --main-text: #FC9100;
+  --primary: #fff;
+  --man-color: #00761a;
+}
+
+.colorPrimary {
+  color: var(--main-text) !important;
+  background: var(--primary) !important;
+}
+
+.primaryButton {
+  color: var(--man-color) !important;
+}
+
+.mat-card {
+  font-family: 'Titillium Web', Roboto, "Helvetica Neue", sans-serif;
+}
+
+@media print {
+
+  .no-print {
+    display: none!important;
+  }
+
+  #content {
+    max-width: 100%!important;
+  }
+
+  * {
+    box-shadow: none!important;
+  }
+}
+
+//scrollbar
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #d3d3d3;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--primary);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #00761a;
+}
+
+.ck-editor__editable_inline {
+  min-height: 300px !important;
+}
+
+// added
+
+.mat-form-field-appearance-legacy .mat-form-field-label,
+.mat-panel-title {
+    color: #00761a;
+}
+
+.mat-form-field-appearance-legacy.ng-invalid .mat-form-field-label,
+.mat-panel-title.ng-invalid {
+    color: red;
+}
+
+.mat-form-field-appearance-legacy.ng-invalid .mat-form-field-ripple {
+  background-color: red;
+}
+
+.mat-raised-button.mat-button-base.mat-primary{
+  background-color: #00761a;
+}
+
+
+// .error {
+//   color: red !important;
+//   font-weight: bolder;
+// }

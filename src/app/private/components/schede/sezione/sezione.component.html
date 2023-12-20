@@ -1,0 +1,118 @@
+<mat-expansion-panel *ngIf="isSezioneComplessa(sezione)" style="margin-bottom: 16px">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <span [class.error]="hasError">
+        {{ sezione.acr }}
+      </span>
+    </mat-panel-title>
+    <mat-panel-description>
+      <span>
+        {{ sezione.def }} <span class="required-field" *ngIf="sezione.obb">*</span>
+      </span>
+      <ng-container *ngIf="sezione.rip">
+        <mat-icon (click)="addChildren($event)">add_circle</mat-icon>
+      </ng-container>
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <div fxLayout="row wrap">
+    <ng-container *ngFor="let c of children">
+      <div fxFlex="40px" *ngIf="canDeleteChild(c)">
+        <button mat-icon-button (click)="deleteChildren(c)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+      <div class="mat-elevation-z8 my-16 p-8" [fxFlex]="canDeleteChild(c) ? 'calc(100% - 40px)' : '100%'">
+        <app-sezione-child [sezione]="c"></app-sezione-child>
+      </div>
+    </ng-container>
+  </div>
+</mat-expansion-panel>
+
+<ng-container *ngIf="isSezioneSemplice(sezione)">
+  <div fxLayout="row wrap" *ngFor="let f of fields">
+    <mat-form-field fxFlex>
+      <!-- FIELD -->
+      <ng-container *ngIf="f.acr === 'TSK'">
+        <input matInput disabled [placeholder]="f.acr + ' - ' + f.def" required [(ngModel)]="$any(f).value" [value]="tipoScheda.tsk">
+      </ng-container>
+
+      <!-- Vocabolario Chiuso, con Mat-select -->
+
+      <ng-container *ngIf="f.acr !== 'TSK' && $any(f).voc === 'C'">
+        <ng-container *ngIf="f.acr == 'LIR'">
+          <mat-select [placeholder]="f.acr + ' - ' + f.def" [required]="f.obb" [(ngModel)]="$any(f).value">
+            <mat-option *ngFor="let o of optionsDataSource" [value]="o.val[0]">
+              {{ o.val }}
+            </mat-option>
+          </mat-select>
+        </ng-container>
+        <ng-container *ngIf="f.acr == 'NCTR'">
+          <mat-select  [placeholder]="f.acr + ' - ' + f.def" [required]="f.obb" [(ngModel)]="$any(f).value">
+            <mat-option *ngFor="let o of optionsDataSource" [value]="o.val.substr(0, 2)">
+              {{ o.val }}
+            </mat-option>
+          </mat-select>
+        </ng-container>
+        <ng-container *ngIf="f.acr != 'NCTR' && f.acr != 'LIR' && optionsDataSource.length > 0">
+          <mat-select  [placeholder]="f.acr + ' - ' + f.def" [required]="f.obb" [(ngModel)]="$any(f).value">
+            <mat-option *ngFor="let o of optionsDataSource" [value]="o.val">
+              {{ o.val }}
+            </mat-option>
+          </mat-select>
+        </ng-container>
+        <!--  -->
+        <ng-container *ngIf="f.acr != 'NCTR' && f.acr != 'LIR' && (!optionsDataSource.length || optionsDataSource.length == 0)">
+          <input #field matInput [placeholder]="f.acr + ' - ' + f.def" [required]="f.obb" [(ngModel)]="$any(f).value"
+          [maxlength]="$any(f).lun">
+        </ng-container>
+      </ng-container>
+
+      <!-- Vocabolario Chiuso, con Mat-autocomplete -->
+
+       <!--<ng-container *ngIf="f.acr !== 'TSK' && $any(f).voc === 'C'">
+        <input matInput [placeholder]="f.acr + ' - ' + f.def" [required]="f.obb" [(ngModel)]="$any(f).value"
+          [matAutocomplete]="auto" (ngModelChange)="filter($any(f).value)">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let o of filteredOptions" [value]="o.val">
+            {{ o.val }}
+          </mat-option>
+        </mat-autocomplete>
+      </ng-container> -->
+
+      <ng-container *ngIf="f.acr !== 'TSK' && schedeService.vocabulary.campi[f.acr]">
+        <input matInput [placeholder]="f.acr + ' - ' + f.def" [required]="f.obb" [(ngModel)]="$any(f).value"
+          [matAutocomplete]="auto" (ngModelChange)="filterJSONVoc($any(f).value, f.acr)">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let o of filteredOptions; index as i" [value]="o">
+            {{ o }}
+          </mat-option>
+        </mat-autocomplete>
+      </ng-container>
+
+      <ng-container *ngIf="f.acr !== 'TSK' && $any(f).voc === 'A'">
+        <input matInput [placeholder]="f.acr + ' - ' + f.def" [required]="f.obb" [(ngModel)]="$any(f).value"
+          [matAutocomplete]="auto" (ngModelChange)="filter($any(f).value)" [maxlength]="$any(f).lun">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let o of filteredOptions" [value]="o.val">
+            {{ o.val }}
+          </mat-option>
+        </mat-autocomplete>
+      </ng-container>
+      <ng-container *ngIf="f.acr !== 'TSK' && $any(f).voc !== 'C' && $any(f).voc !== 'A'">
+        <input #field matInput [placeholder]="f.acr + ' - ' + f.def" [required]="f.obb" [(ngModel)]="$any(f).value"
+          [maxlength]="$any(f).lun">
+      </ng-container>
+      <!-- /FIELD -->
+    </mat-form-field>
+    <div *ngIf="canAddField(f)" fxFlex="40px">
+      <button mat-icon-button (click)="addField($event)">
+        <mat-icon>add_circle</mat-icon>
+      </button>
+    </div>
+    <div *ngIf="canDeleteField(f)" fxFlex="40px">
+      <button mat-icon-button (click)="deleteField(f)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
+</ng-container>

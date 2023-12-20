@@ -1,0 +1,79 @@
+<mat-form-field>
+  <mat-select [formControl]="tipoSchedaCtrl" placeholder="Tipo Scheda" (selectionChange)="setTipoScheda($event.value)">
+    <mat-option *ngFor="let tipoScheda of tipoSchedeDataSource" [value]="tipoScheda">
+      {{ tipoScheda.des }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<div *ngIf="tipoScheda">
+  <h2 class="p-12">{{ tipoScheda.des }}</h2>
+  <div fxLayout="row wrap">
+    <mat-form-field fxFlex="100%">
+      <input matInput placeholder="Denominazione" [(ngModel)]="nomeScheda">
+      <mat-hint>Inserisci un nome univoco per questa scheda</mat-hint>
+    </mat-form-field>
+    <div fxFlex="100%"><br /></div>
+  </div>
+  <mat-accordion>
+    <ng-container *ngFor="let p of tipoScheda.paragrafi">
+      <app-paragrafo [paragrafo]="p" [tipoScheda]="tipoScheda"></app-paragrafo>
+    </ng-container>
+  </mat-accordion>
+  <mat-card-actions align="end" class="p-24">
+    <button mat-raised-button class="colorPrimary" (click)="save()">Salva</button>
+    <button mat-raised-button class="colorPrimary" (click)="saveAndValidate()">Salva e valida</button>
+  </mat-card-actions>
+</div>
+
+
+<ng-container *ngIf="route.snapshot.params.id">
+  <div>
+    <h2 class="allegati">Immagine della scheda</h2>
+    <div class="ngx_upload">
+      <ngx-upload [multiple]="true" [asDialog]="false" (afterUpload)="handleUpload($event)"
+        (afterError)="handleUploadError($event)"></ngx-upload>
+    </div>
+  </div>
+
+  <ng-container *ngIf="allegati.length > 0">
+    <div class="" *ngFor="let a of allegati">
+      <div class="area_allegati">
+        <div class="nome_allegato">
+          <img [src]="a.url">
+        </div>
+        <div class="btnAllegati">
+          <button mat-raised-button (click)="setPrincipale(a)" *ngIf="!a.principale">
+            Imposta come principale
+          </button>
+          <button mat-raised-button (click)="deleteFile(a)">
+            <mat-icon>remove_circle_outline</mat-icon>
+          </button>
+          <button class="download" mat-raised-button (click)="downloadFile(a)">
+            <mat-icon>download</mat-icon>
+          </button>
+        </div>
+      </div>
+      <hr>
+    </div>
+  </ng-container>
+</ng-container>
+
+<button (click)="import()" title="Importa scheda" aria-label="Importa" class="export-pdf no-print mat-focus-indicator colorPrimary mat-fab mat-button-base mat-accent" mat-button>
+  <mat-icon>cloud_upload</mat-icon>
+</button>
+
+<ng-template #detailsModal>
+  <mat-dialog-content>
+    <ngx-dropzone (change)="onSelect($event)">
+      <ngx-dropzone-label>Trascina o clicca per inserire il file zip</ngx-dropzone-label>
+      <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+        <ngx-dropzone-label>{{ f.name.slice(0, 10) }} ...</ngx-dropzone-label>
+      </ngx-dropzone-preview>
+    </ngx-dropzone>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-raised-button mat-dialog-close="">Chiudi</button>
+    <button mat-raised-button color="primary" (click)="importa()">Salva</button>
+  </mat-dialog-actions>
+</ng-template>

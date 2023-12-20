@@ -1,0 +1,23 @@
+.ngx_upload {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.allegati {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.area_allegati {
+  margin-top: 30px;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.nome_allegato {
+  font-weight: 600;
+}

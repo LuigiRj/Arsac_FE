@@ -1,0 +1,6 @@
+<div class="breadcrumbs">
+  <span *ngFor="let breadcrumb of breadcrumbs; let last = last">
+    <a *ngIf="!last" [routerLink]="breadcrumb.url" aria-label="breadcrumbs" title="{{ breadcrumb.label }}">{{ breadcrumb.label }} {{last ? '' : '/'}} </a>
+    <span *ngIf="last" aria-label="breadcrumbs" title="{{ breadcrumb.label }}">{{ breadcrumb.label }}</span>
+  </span>
+</div>

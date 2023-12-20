@@ -1,0 +1,5 @@
+<ng-container >
+  <ng-container *ngFor="let s of paragrafo.sezioni; let i = index">
+    <app-sezione-complessa *ngIf="show" (showField)="check($event)" [sezione]="s" [scheda]="scheda" [paragrafo_acr]="paragrafo_acr"></app-sezione-complessa>
+  </ng-container>
+</ng-container>

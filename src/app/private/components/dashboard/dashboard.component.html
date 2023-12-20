@@ -1,0 +1,26 @@
+<div fxLayout="row wrap">
+  <div fxFlex="100%" class="containerTitle">
+    <h2 class="text-center">{{title()}}</h2>
+  </div>
+  <div fxFlex="100%">
+    <img class="splash" src="/assets/images/logo.png">
+  </div>
+  <div fxFlex="100%" fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="authService.isAuthenticated()">
+    <div fxFlex="44%" *ngFor="let m of modules" class="text-center">
+      <a [routerLink]="m.url || m.id" class="module colorPrimary">
+        <mat-icon>{{m.icon}}</mat-icon>
+        <br />
+        {{m.title}}
+      </a>
+    </div>
+    <div fxFlex="100%" *ngIf="!modules.length">
+      <h4 class="text-center">La pagina non esiste oppure non possiedi i privilegi per visualizzarla.</h4>
+    </div>
+  </div>
+  <div *ngIf="!authService.isAuthenticated()" class="m-auto">
+    <a mat-raised-button class="colorPrimary" [href]="authUrl()" rel="noreferrer">
+      Accedi
+    </a>
+  </div>
+</div>
+

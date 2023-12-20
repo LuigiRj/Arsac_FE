@@ -1,0 +1,232 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-left: 10%;
+}
+
+.timeline {
+  margin: 20px 60px;
+  border-left: 2px solid #333;
+  -webkit-transform: scale(0.8);
+  -moz-transform: scale(0.8);
+  -o-transform: scale(0.8);
+  transform: scale(0.8);
+  -webkit-transform-origin:left top;
+  -moz-transform-origin:left top;
+  /* more transform-origin */
+}
+
+.card {
+  position: relative;
+  margin: 60px 0 50px 50px;
+  color: black;
+  border-radius: 8px;
+  max-width: 400px;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  // gap: 10px;
+  padding-top: 50px;
+}
+
+.title,
+h3 {
+  color: var(--primary);
+  text-align: center;
+  position: relative;
+}
+
+.title::before {
+  content: attr(data);
+  position: absolute;
+  width: 100px;
+  padding: 10px;
+  height: 10px;
+  background: white;
+  border-radius: 999px;
+  left: -115px;
+  top: -20px;
+  border: 3px solid var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.add_timeline {
+  width: 300px;
+  transform: translate(-154px, 0px);
+  color: var(--primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  .center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.rounded {
+  border-radius: 999px;
+}
+
+.header_timeline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hover-timeline:hover {
+  cursor: pointer;
+  opacity: 0.8;
+
+}
+
+.card .hover_timeline{
+  cursor: pointer;
+  visibility: hidden;
+}
+
+.card:hover .hover_timeline{
+  visibility: visible;
+}
+
+.ngx_upload {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.allegati {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.area_allegati {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.nome_allegato {
+  font-weight: 600;
+}
+
+.timeline-wrapper {
+  transform: translate(61px, -0px);
+}
+
+.default-timeline {
+  transform: translate(-62px, 0px);
+
+}
+
+.inizio {
+  height: 50px;
+  width: 120px;
+  padding: 12px;
+  content: "";
+}
+
+.restauro {
+  border-left: 2px solid blue;
+  color: blue;
+  height: 100%;
+  padding: 60px 10px;
+  z-index: -1;
+}
+
+.arrivo {
+  border-right: 1px solid darkcyan;
+  color: darkcyan;
+  height: 100%;
+  padding: 50px 10px;
+  z-index: -1;
+}
+
+.iniziale {
+  border-right: 1px solid darkcyan;
+  color: darkcyan;
+  height: 100%;
+  padding: 50px 10px;
+  z-index: -1;
+}
+
+.altro {
+  border-right: 1px solid black;
+  color: black;
+  height: 100%;
+  padding: 50px 10px;
+  z-index: -1;
+}
+
+.spostamento {
+  border-left: 1px solid lightblue;
+  color: lightblue;
+  height: 100%;
+  padding: 50px 10px;
+  z-index: -1;
+}
+
+.monitoraggio {
+  border-left: 1px solid lightcoral;
+  color: lightcoral;
+  height: 100%;
+  padding: 50px 10px;
+  z-index: -1;
+}
+
+.restituzione {
+  border-left: 4px solid green;
+  color: green;
+  height: 100%;
+  padding: 50px 10px;
+  z-index: -1;
+}
+
+.uscita {
+  border-left: 5px solid blue;
+  color: blue;
+  height: 100%;
+  padding: 50px 10px;
+  z-index: -1;
+}
+
+.furto {
+  border-right: 2px solid red;
+  color: red;
+  height: 100%;
+  padding: 50px 10px;
+  z-index: -1;
+}
+
+.last {
+  border-right: 1px solid !important;
+  border-left: 0 !important;
+}
+
+@media (max-width:960px) {
+  .timeline-wrapper {
+    width: 70%;
+  }
+}

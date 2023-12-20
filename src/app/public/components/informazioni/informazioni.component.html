@@ -1,0 +1,105 @@
+<div id="informazioni" fxLayout="row" fxLayout.xs="column">
+  <aside fxFlex.md="30%" fxFlex.sm="100%" fxFlex.xs="0 0 100" fxFlex="20">
+    <app-breadcrumbs [breadcrumbs]="[{label: 'Home', url: '/'}, {label: 'Informazioni', url: '/public/informazioni'}]"></app-breadcrumbs>
+    <div class="">
+      <div class="sidebar">
+        <ul>
+          <span class="head">Informazioni</span>
+          <ng-container *ngFor="let n of obj">
+            <li><a routerLinkActive="active" routerLink="/public/informazioni/{{ n.url }}">{{ n.lbl }}</a></li>
+          </ng-container>
+        </ul>
+      </div>
+    </div>
+  </aside>
+  <main fxFlex="100">
+    <div id="orari" *ngIf="activatedRoute == 'orari-e-tariffe'">
+      <h1> Orari e tariffe</h1>
+      <div class="content">
+        <strong>Orari</strong>
+        <p></p>
+        <span class="indent">Orario continuato</span>
+        <div class=""></div>
+        <span class="indent">Dal martedì alla domenica, dalle 10.00 alle 19.00</span>
+        <p></p>
+        <strong>Chiusura</strong>
+        <div class=""></div>
+        <span class="indent">Chiuso il lunedì</span>
+        <p></p>
+        <strong>Biglietteria</strong>
+        <p></p>
+        <div class="man">
+          <div class="">
+            <span class="indent">Intero MAN (over 25)</span>
+            <div class=""></div>
+            <strong class="indent">5 euro</strong>
+          </div>
+          <div class="">
+            <span class="indent">Gratuito MAN (under 18)</span>
+            <div class=""></div>
+            <span class="indent">Gratuito la prima domenica del mese</span>
+          </div>
+        </div>
+        <p></p>
+        <span class="indent">Ridotto MAN ( dai 18 ai 25 anni))</span>
+        <div></div>
+        <strong class="indent">3 euro</strong>
+        <div class=""></div>
+      </div>
+    </div>
+    <div id="indicazioni" *ngIf="activatedRoute == 'informazioni' || activatedRoute == 'come-raggiungerci'">
+      <h1>Come raggiungerci</h1>
+      <div class="content">
+        <iframe class="frame" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2828.055065693577!2d9.332921!3d40.321454!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12de866897ec334b%3A0xc77fb2758832f3cf!2sMAN%20Museo%20d&#39;arte%20della%20Provincia%20di%20Nuoro!5e1!3m2!1sit!2sus!4v1677684660252!5m2!1sit!2sus" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+        <div class="transportation-info">
+          <h3 class="category">In autobus</h3>
+          <div class="subcategory">Da Cagliari (Piazza Matteotti, aeroporto Elmas)</div>
+          <div class="subinfo">Per orari e informazioni: <a href="http://www.arst.sardegna.it">www.arst.sardegna.it</a></div>
+          <div class="subcategory">Da Olbia (Porto, aeroporto Costa Smeralda)</div>
+          <div class="subinfo">Per orari e informazioni: <a href="http://www.arst.sardegna.it">www.arst.sardegna.it</a> - <a href="http://www.deplanobus.it">www.deplanobus.it</a></div>
+          <div class="subcategory">Da Alghero (aeroporto Fertilia)</div>
+          <div class="subinfo">Per orari e informazioni: <a href="http://www.redentours.com">www.redentours.com</a></div>
+
+          <h3 class="category">In treno</h3>
+          <div class="subcategory">Cagliari-Macomer-Nuoro (Stazione via Lamarmora)</div>
+          <div class="subcategory">Sassari-Macomer-Nuoro (Stazione via Lamarmora)</div>
+          <div class="subinfo">Per orari e informazioni: <a href="http://www.arst.sardegna.it">www.arst.sardegna.it</a></div>
+
+          <h3 class="category">In auto</h3>
+          <div class="subcategory">Da Cagliari (aeroporto Elmas)</div>
+          <div class="subinfo">Ss 131 Cagliari-Sassari, innesto ss131 DCN uscita Nuoro</div>
+          <div class="subcategory">Da Olbia (aeroporto Costa Smeralda)</div>
+          <div class="subinfo">Ss 131 DCN uscita Nuoro</div>
+          <div class="subcategory">Da Alghero (aeroporto Fertilia)</div>
+          <div class="subinfo">Ss 127 Alghero-Sassari, innesto ss131 Sassari-Cagliari, innesto ss129 uscita Macomer, innesto ss131 uscita Nuoro</div>
+
+          <h3 class="category">In città</h3>
+          <div class="subcategory">Dalla stazione degli autobus (viale Sardegna)</div>
+          <div class="subinfo">Linea 1d direzione centro, fermata via Manzoni</div>
+          <div class="subcategory">Dalla stazione dei treni (via Lamarmora)</div>
+          <div class="subinfo">Linea 3 direzione centro, fermata via Manzoni</div>
+          <div class="subinfo">Linea 1S, 1FS fermata Corso Garibaldi</div>
+          <div class="subinfo">Linea 1D, 1FD fermata via Tola</div>
+          <div class="subinfo">Per orari e informazioni: <a href="http://www.atpnuoro.it">www.atpnuoro.it</a></div>
+        </div>
+      </div>
+    </div>
+    <div id="indicazioni" *ngIf="activatedRoute == 'accessibilità'">
+      <h1>Accessibilità</h1>
+      <div class="content">
+        <p>I quattro piani del museo sono interamente accessibili ai visitatori con difficoltà di deambulazione tramite appositi ascensori e rampe.</p>
+      </div>
+    </div>
+    <div id="indicazioni" *ngIf="activatedRoute == 'contatti'">
+      <h1>Contatti</h1>
+      <div class="content">
+        <p>MAN_Museo d’Arte Provincia di Nuoro</p>
+        <p>Via Sebastiano Satta 27 - 08100 Nuoro</p>
+        <p></p>
+        <p><strong>Telefono</strong>: +39.0784.252110</p>
+        <strong><p>E-mail: info@museoman.it; museoman@pec.it</p></strong>
+      </div>
+    </div>
+  </main>
+</div>

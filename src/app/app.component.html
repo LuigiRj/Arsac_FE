@@ -1,0 +1,83 @@
+<ng-container *ngIf="!isPublic">
+  <div fxLayout="row wrap" fxLayout.xs="column" fxLayout.sm="column" id="main">
+    <div class="head no-print">
+      <img src="assets/images/logo.png" class="logo roba media-collapsed">
+      <button mat-mini-fab class="colorPrimary media-collapsed" aria-label="Toggle Sidebar" (click)="toggleSidebar()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+    <div fxFlex.xs="100" id="sidebar" *ngIf="!isPublic" [ngClass]="{ collapsed: !sidebarOpen, 'no-print': true }">
+      <div class="colla" fxLayout="row">
+        <img src="assets/images/logo_white.png" class="logo roba">
+        <button mat-mini-fab class="colorPrimary media-collapse" aria-label="Toggle Sidebar" (click)="toggleSidebar()"
+          id="sidebar-toggle">
+          <mat-icon>menu</mat-icon>
+        </button>
+      </div>
+      <div style="color: #FFF; padding: 16px; width: 60%; display: block; overflow: hidden; font-size: 80%;"
+        *ngIf="sidebarOpen && authService.user">
+        {{ authService.user.firstName }} {{ authService.user.lastName }}
+      </div>
+      <div class="menu">
+        <div class="menu-module dashboard" [class.active]="isHome()" routerLink="schede/">
+          <div class="menu-module-link">
+            <div class="icon" matTooltipPosition="right">
+              <mat-icon>dashboard</mat-icon>
+            </div>
+            <div class="title">Dashboard</div>
+          </div>
+        </div>
+        <div *ngFor="let module of modules" class="menu-module" (click)="toggleClass($event,'active')"
+          [class.active]="isChildrenPath(module)">
+          <div class="menu-module-link">
+            <div class="icon" [matTooltip]="module.title" matTooltipPosition="right">
+              <mat-icon>{{module.icon}}</mat-icon>
+            </div>
+            <div class="title">{{ module.title }}</div>
+          </div>
+          <div class="children">
+            <div *ngFor="let n of module.navigations" class="menu-link" [class.active]="isCurrentPath(n)"
+              [routerLink]="n.url">
+              <div class="icon" [matTooltip]="n.title" matTooltipPosition="right">
+                <mat-icon>{{n.icon}}</mat-icon>
+              </div>
+              <div class="title">{{ n.title }}</div>
+            </div>
+          </div>
+        </div>
+        <div class="menu-module dashboard" (click)="logout()" *ngIf="isLogged()">
+          <div class="menu-module-link">
+            <div class="icon" matTooltipPosition="right">
+              <mat-icon>exit_to_app</mat-icon>
+            </div>
+            <div class="title">Logout</div>
+          </div>
+        </div>
+        <p class="versionStyle">v. {{version}}</p>
+      </div>
+    </div>
+    <div fxFlex id="content" [ngClass]="{ collapsed: !sidebarOpen }">
+      <mat-card *ngIf="!isPublic" class="mat-elevation-z8 p-12">
+        <ng-container>
+        </ng-container>
+        <router-outlet *ngIf="!isPublic"></router-outlet>
+      </mat-card>
+    </div>
+  </div>
+</ng-container>
+<div *ngIf="isPublic" style="min-height: 100vh;">
+  <div class="main-public" fxLayout="column">
+    <app-navbar></app-navbar>
+    <router-outlet></router-outlet>
+    <div>
+      <app-footer></app-footer>
+    </div>
+  </div>
+</div>
+
+
+<simple-notifications></simple-notifications>
+
+<div id="loading" class="no-print">
+  <mat-spinner class="m-auto"></mat-spinner>
+</div>

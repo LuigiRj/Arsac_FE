@@ -1,0 +1,30 @@
+<ng-container *ngIf="isSezioneComplessa(sezione)" style="margin-bottom: 16px">
+  <div *ngIf="show" [ngClass]="show ? 'boxed' : ''">
+    <div class="px-12 py-8">
+      <strong>{{ sezione.acr }} - {{ sezione.def }}</strong>
+    </div>
+    <ng-container *ngFor="let c of children; let i = index">
+      <app-sezione-complessa-child [sezione]="c" [sezione_name]="sezione.acr" [paragrafo_acr]="paragrafo_acr"
+        [scheda]="scheda"></app-sezione-complessa-child>
+    </ng-container>
+  </div>
+</ng-container>
+<ng-container *ngIf="isSezioneSemplice(sezione)">
+  <ng-container *ngFor="let f of fields">
+    <ng-container >
+      <!-- <div fxLayout="row wrap" [ngClass]="$any(f).value ? 'boxed' : ''"> -->
+      <div fxLayout="row wrap" class="boxed">
+        <strong fxFlex="50%">{{sezione.acr}} - {{sezione.def}}</strong>
+        <!-- <strong fxFlex="50%" *ngIf="$any(f).value">{{sezione.acr}} - {{sezione.def}}</strong> -->
+        <ng-container>
+          <div fxFlex="50%">
+            <div #field>
+              <!-- <span *ngIf="$any(f).value">{{$any(f).value}}</span> -->
+              <span >{{$any(f).value}}</span>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </ng-container>
+  </ng-container>
+</ng-container>

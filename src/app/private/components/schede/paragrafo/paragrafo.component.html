@@ -1,0 +1,27 @@
+<mat-expansion-panel class="prova">
+  <mat-expansion-panel-header class="align-header">
+    <mat-panel-title>
+      <span [class.error]="hasError">
+        {{ paragrafo.acr }}
+      </span>
+    </mat-panel-title>
+    <mat-panel-description>
+      <span>
+        {{ paragrafo.def }} <span class="required-field" *ngIf="paragrafo.obb">*</span>
+      </span>
+      <ng-container *ngIf="paragrafo.rip">
+        <mat-icon (click)="addChildren($event)">add_circle</mat-icon>
+      </ng-container>
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <div class="mat-elevation-z8 my-16 p-8" *ngFor="let c of children" fxLayout="row wrap" #child>
+    <div fxFlex>
+      <app-paragrafo-child [paragrafo]="c" [tipoScheda]="tipoScheda"></app-paragrafo-child>
+    </div>
+    <div fxFlex="40px" *ngIf="canDeleteChild(c)">
+      <button mat-icon-button (click)="deleteChild(c)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
+</mat-expansion-panel>

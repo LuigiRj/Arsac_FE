@@ -1,0 +1,47 @@
+<div class="container-evento" fxLayout="row" fxLayout.xs="column" fxLayout.sm="column">
+  <aside fxFlex.md="30%" fxFlex.sm="60%" fxFlex.xs="100" fxFlex="20" class="ricerca-sidebar">
+    <app-breadcrumbs [breadcrumbs]="[{label: 'Home', url: '/'}, {label: 'Eventi', url: '/public'}]"></app-breadcrumbs>
+    <h3 class="primary">Ricerca evento</h3>
+    <form [formGroup]="searchForm" fxLayout="column">
+      <mat-form-field appearance="fill">
+        <mat-label>Titolo</mat-label>
+        <input matInput formControlName="titolo" placeholder="Titolo">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Descrizione</mat-label>
+        <input matInput formControlName="testo" placeholder="Corpo della evento">
+      </mat-form-field>
+    </form>
+    <div class="actions">
+      <button mat-raised-button color="primary" (click)="reset()">Reset</button>
+      <button mat-raised-button color="primary" (click)="search()">Cerca</button>
+    </div>
+  </aside>
+  <main fxFlex>
+    <section class="title">
+      <h1>[ MOSTRE ]</h1>
+      <div class="sorting">
+        <mat-form-field>
+          <mat-label>Ordina per</mat-label>
+          <mat-select name="Ordina" id="select" (selectionChange)="sortBy($event)" matNativeControl [value]="'desc'">
+            <mat-option value="asc">Crescente</mat-option>
+            <mat-option value="desc">Descrescente</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </section>
+    <div>
+      <div fxLayout="row wrap" matSort>
+        <div fxFlex="45" fxFlex.xs="0 0 100%" fxFlex.sm="0 0 100%" fxFlex.md="0 0 100%" fxFlex.lg="0 0 100%" *ngFor="let evento of evento.data" fxLayoutAlign="start stretch">
+          <app-card-evento [evento]="evento"></app-card-evento>
+        </div>
+      </div>
+      <div class="empty-table" *ngIf="evento.data.length===0">
+        Nessun elemento presente. Per iniziare compila il form di ricerca
+      </div>
+    </div>
+    <mat-paginator [pageSizeOptions]="[8, 50, 100]"> </mat-paginator>
+  </main>
+</div>
+
+<div class=""></div>

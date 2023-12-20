@@ -1,0 +1,51 @@
+<div *ngIf="tipoScheda" id="contentToConvert" class="printable">
+  <h2 class="p-12 text-center">{{ tipoScheda.des }}</h2>
+  <ng-container *ngIf="allegati">
+    <div class="carousel-wrapper">
+      <owl-carousel-o class="" [options]="customOptions">
+        <ng-container *ngFor="let slide of allegati">
+          <ng-template carouselSlide [id]="slide.id.toString()">
+            <div class="slide">
+              <img [src]="slide.url" [alt]="slide.alt" [title]="slide.title">
+            </div>
+          </ng-template>
+        </ng-container>
+      </owl-carousel-o>
+    </div>
+    <ng-container *ngFor="let slide of allegati">
+        <div class="image-container">
+          <img [ngClass]="{'print': slide.principale}" [src]="slide.url" [alt]="slide.alt" [title]="slide.title">
+        </div>
+    </ng-container>
+  </ng-container>
+  <ng-container *ngFor="let p of tipoScheda.paragrafi">
+    <div class="boxed first-level mat-elevation-z8">
+      <app-paragrafi [paragrafo]="p" [scheda]="scheda"></app-paragrafi>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="direzione || admin">
+    <div class="report no-print">
+      <!-- two field with Creata da and Modificata da -->
+      <div class="report-user">
+        <h3>Creata da</h3>
+        <p>{{ createdBy }}</p>
+      </div>
+    </div>
+  </ng-container>
+</div>
+
+<ng-container *ngIf="tipoScheda">
+  <button (click)="window.print()" title="Stampa scheda" aria-label="Stampa" class="print-pdf no-print mat-focus-indicator colorPrimary mat-fab mat-button-base mat-accent" mat-button>
+    <mat-icon>picture_as_pdf</mat-icon>
+  </button>
+
+  <button *ngIf="validata && private" (click)="export()" title="Esporta scheda" aria-label="Esporta" class="export-pdf no-print mat-focus-indicator colorPrimary mat-fab mat-button-base mat-accent" mat-button>
+    <mat-icon>cloud_download</mat-icon>
+  </button>
+
+  <ng-container *ngIf="scroll > 100">
+    <button (click)="scrollToTop()" title="Torna in cima" aria-label="Torna in cima" class="scroll-to-top no-print mat-focus-indicator colorPrimary mat-fab mat-button-base mat-accent" mat-button>
+      <mat-icon>arrow_upward</mat-icon>
+    </button>
+  </ng-container>
+</ng-container>

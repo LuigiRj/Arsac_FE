@@ -1,0 +1,13 @@
+<div fxLayout="row wrap">
+  <div fxFlex="100%">
+    {{ text }}
+    <br />
+    <br />
+  </div>
+</div>
+<mat-dialog-actions align="end">
+  <button mat-raised-button (click)="ok()">
+    OK
+  </button>
+  <button mat-raised-button (click)="cancel()">Annulla</button>
+</mat-dialog-actions>

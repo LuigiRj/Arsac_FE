@@ -1,0 +1,21 @@
+.mat-expansion-panel-header-description,
+.mat-expansion-panel-header-title {
+  flex-basis: 0;
+}
+
+.mat-expansion-panel-header-description {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+h3 {
+  margin: 0;
+  padding: 10px;
+  letter-spacing: 2px;
+  font-weight: 700;
+  color: var(--main-text);
+  background: var(--man-color);
+}
+
+

@@ -1,0 +1,46 @@
+<ng-container *ngIf="immagine">
+  <ng-container *ngIf="evento">
+    <app-breadcrumbs
+      [breadcrumbs]="[{label: 'Home', url: '/'}, {label: 'Eventi', url: '/public/eventi'}, {label: '' + evento.titolo, url: '/' + evento.id}]"></app-breadcrumbs>
+      <div class="container" fxLayout="column">
+        <h1>{{ evento.titolo }}</h1>
+        <p></p>
+        <div fxLayout="row" fxFlex="50" fxLayout.xs="column" fxLayout.sm="column" fxFlex.sm="100" fxLayoutAlign="space-evenly">
+          <img [src]="immagine" alt="{{ evento.titolo }}" fxLayout="column" fxLayoutAlign="center center" fxFlex="40" (click)="openImage()">
+          <div class="" fxLayout="row" fxFlex="50">
+            <div class="info" fxLayout="column" fxLayoutAlign="center left">
+              <p>dal {{ evento.data_inizio | date: 'shortDate' }}  al {{ evento.data_fine | date: 'shortDate' }} </p>
+              <p *ngIf="evento.orario">alle {{ evento.orario }} </p>
+              <h2>{{ evento.luogo }} </h2>
+              <strong>{{ evento.costo }} €</strong>
+              <p></p>
+              <div class="" fxFlex="1 1 100" fxLayoutAlign="left center">
+                <button fxFlex="0 0 30" fxFlex.xs="100" mat-raised-button color="primary" routerLink="/public/eventi/{{evento.id}}">Acquista biglietto</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p></p>
+        <div class="container-testo" fxFlex="1 1 100" fxLayoutAlign="left center">
+          <p fxLayout="column"  [innerHTML]="evento.testo">
+          </p>
+        </div>
+        <div class="bottom mat-caption" fxLayout="row" fxLayoutAlign="end center">
+          <div class="">
+            <p>{{ evento.createdAt | date: 'shortDate' }} </p>
+          </div>
+        </div>
+      </div>
+  </ng-container>
+</ng-container>
+
+<ng-template #detailsModal >
+  <div class="" fxFlex>
+    <div class="">
+      <button mat-icon-button mat-dialog-close>
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <img class="no-hide" src="{{immagine}}" alt="{{evento.titolo}}">
+  </div>
+</ng-template>

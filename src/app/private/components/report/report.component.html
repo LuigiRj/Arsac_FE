@@ -1,0 +1,73 @@
+<div class="content-card">
+  <h1>Inserimenti effettuati dagli utenti</h1>
+  <form [formGroup]="searchForm" class="py-12">
+    <div fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutGap="10px" fxLayoutGap.lt-md="0">
+      <mat-form-field>
+        <mat-label>Dal</mat-label>
+        <input matInput [matDatepicker]="startDatePicker" formControlName="startDate">
+        <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #startDatePicker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Al</mat-label>
+        <input matInput [matDatepicker]="endDatePicker" formControlName="endDate">
+        <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #endDatePicker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field fxFlex="33%">
+        <input matInput formControlName="user" placeholder="User" [matAutocomplete]="autoUser">
+        <mat-autocomplete #autoUser="matAutocomplete" [displayWith]="utilsService.displayEntity">
+          <mat-option *ngFor="let u of usersDataSource | async" [value]="u">
+            {{ u }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <div fxFlex="144px">
+        <button mat-raised-button (click)="search()" class="mt-4 mx-4"  aria-label="Cerca">
+          <mat-icon class="mat-24">search</mat-icon>
+        </button>
+        <button mat-raised-button (click)="clear()" class="mt-4 mx-4"  aria-label="Reset">
+          <mat-icon class="mat-24">clear</mat-icon>
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <div class="mat-elevation-z8 mt-20">
+    <mat-table #table [dataSource]="dataSource" class="table-condensed" matSort>
+      <ng-container matColumnDef="id">
+        <mat-header-cell fxFlex="74px" *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
+        <mat-cell fxFlex="74px" *matCellDef="let row">{{ row.user?.id }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="firstName">
+        <mat-header-cell fxFlex *matHeaderCellDef mat-sort-header>Nome</mat-header-cell>
+        <mat-cell fxFlex *matCellDef="let row">{{ row.user?.firstName }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="lastName">
+        <mat-header-cell fxFlex *matHeaderCellDef mat-sort-header>Cognome</mat-header-cell>
+        <mat-cell fxFlex *matCellDef="let row">{{ row.user?.lastName }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="numero">
+        <mat-header-cell fxFlex *matHeaderCellDef mat-sort-header>Schede inserite</mat-header-cell>
+        <mat-cell fxFlex *matCellDef="let row">{{ (row.doc_count )}}</mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *cdkRowDef="let row; columns: displayedColumns;"></mat-row>
+
+    </mat-table>
+
+    <div class="empty-table" *ngIf="dataSource.data.length===0">
+      Nessun elemento presente. Per iniziare compila il form di ricerca
+    </div>
+
+    <mat-paginator [pageSizeOptions]="[25, 50, 100]"> </mat-paginator>
+  </div>
+
+  <div class="export">
+    <button mat-raised-button color="primary" (click)="export()">Esporta dati</button>
+  </div>
+</div>

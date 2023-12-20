@@ -1,0 +1,65 @@
+<nav>
+  <div class="navbar">
+    <div class="navbar-brand-container">
+      <a class="navbar-brand" routerLink="/">
+        <img src="../../../assets/images/logo_white.png" alt="Logo">
+      </a>
+    </div>
+    <mat-icon class="burger-menu" (click)="toggleMenu()">menu</mat-icon>
+    <div class="navbar-right">
+      <a mat-raised-button color="primary" [href]="authUrl()" rel="noreferrer" *ngIf="!isLogged()">Login</a>
+      <a mat-raised-button color="primary" (click)="logout()" *ngIf="isLogged()">Logout</a>
+      <a mat-raised-button color="primary" [routerLink]="(admin || schedatore || direzione ) ? 'schede' : 'monitoraggio' " *ngIf="isLogged()">Admin</a>
+    </div>
+  </div>
+  <div class="navigation">
+    <!--<ul *ngFor="let n of obj">
+      <a routerLinkActive="active" routerLink="public/{{n.url}}"><li>{{n.lbl.replace('-', ' ') }}</li></a>
+    </ul>-->
+    <ul *ngFor="let n of navigations; let i = index">
+
+      <!--<button mat-button [matMenuTriggerFor]="menu" #menuTrigger1="matMenuTrigger" (mouseover)="openMyMenu(menuTrigger1)">{{n.nome.replace('-', ' ') }}</button>
+      <mat-menu #menu="matMenu">-->
+
+
+
+        <a ></a><li>
+        <div class="dropdown">
+          <button routerLinkActive="active" routerLink="public/{{n.link}}" class="dropbtn">{{n.nome.replace('-', ' ') }}</button>
+          <div class="dropdown-content">
+           <button routerLinkActive="active" routerLink="public/{{n.link}}/{{d}}" *ngFor="let d of n.content" mat-menu-item>{{d.replace('-', ' ') }}</button>
+
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="popup" *ngIf="isMenuOpen">
+    <div class="popup-content">
+      <div class="popup-auth">
+        <a mat-raised-button color="primary" [href]="authUrl()" rel="noreferrer" *ngIf="!isLogged()">Login</a>
+        <a mat-raised-button color="primary" (click)="logout()" *ngIf="isLogged()">Logout</a>
+        <a mat-raised-button color="primary" [routerLink]="(admin || schedatore || direzione ) ? 'schede' : 'monitoraggio' " *ngIf="isLogged()">Admin</a>
+      </div>
+      <ul *ngFor="let n of navigations; let i = index">
+
+        <!--<button mat-button [matMenuTriggerFor]="menu" #menuTrigger1="matMenuTrigger" (mouseover)="openMyMenu(menuTrigger1)">{{n.nome.replace('-', ' ') }}</button>
+        <mat-menu #menu="matMenu">-->
+
+
+
+          <a ></a><li>
+          <div class="dropdown">
+            <button routerLinkActive="active" routerLink="public/{{n.link}}" class="dropbtn">{{n.nome.replace('-', ' ') }}</button>
+            <div class="dropdown-content">
+             <button routerLinkActive="active" routerLink="public/{{n.link}}/{{d}}" *ngFor="let d of n.content" mat-menu-item>{{d.replace('-', ' ') }}</button>
+
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="content-separator"></div>

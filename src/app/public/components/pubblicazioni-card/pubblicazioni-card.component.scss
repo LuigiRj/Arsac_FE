@@ -1,0 +1,81 @@
+.mat-card{
+  box-shadow: none!important;
+}
+
+.textTile{
+  background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+  z-index: 2;
+}
+
+.cardTile{
+  background-size: cover!important;
+}
+
+.annoPar{
+color: #fff;
+font-size: 18px;
+font-family: Inter;
+position: absolute;
+right: 30px;
+top: 10px;
+}
+
+.nomePar{
+  color: #fff;
+  font-size: 24px;
+  font-family: Inter;
+  position: absolute;
+  left: 30px;
+  bottom: 50px;
+}
+
+.cognomePar{
+  color: #fff;
+  font-size: 32px;
+  font-family: Inter;
+  position: absolute;
+  left: 30px;
+  bottom: 0px;
+}
+
+@media (max-width: 900px) {
+  .grid{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    grid-gap: 0px;
+  }
+
+  .annoPar{
+    right: 10px;
+    top: 0px;
+    }
+
+    .nomePar{
+      left: 10px;
+      bottom: 20px;
+    }
+
+    .cognomePar{
+      left: 10px;
+      bottom: -25px;
+    }
+}
+
+@media (max-width: 480px) {
+  .annoPar{
+  right: 10px;
+  top: 0px;
+  }
+
+  .nomePar{
+    left: 10px;
+    bottom: 20px;
+  }
+
+  .cognomePar{
+    left: 10px;
+    bottom: -25px;
+  }
+
+}

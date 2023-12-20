@@ -1,0 +1,106 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.carousel-wrapper {
+  position: relative;
+  padding: 30px 0;
+  max-width: 80vw;
+  height: 100%;
+  vertical-align: middle;
+  margin: 0 auto;
+
+  .slide img{
+    max-height: 70vh;
+    width: 100%;
+    object-fit: cover;
+    margin: 0 auto;
+    padding: 20px;
+    // opacity: 0.5;
+  }
+
+  &:hover .text-overlay {
+    opacity: 1;
+  }
+}
+
+main {
+  padding: 30px 0;
+  max-width: 80vw;
+  height: 100%;
+  vertical-align: middle;
+  margin: 0 auto;
+
+  .grid {
+    display: grid;
+    // two column two row grid
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 0px;
+  }
+
+  .gridMinor {
+    display: grid;
+    // two column two row grid
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-gap: 0px;
+  }
+
+  .flex {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+
+    app-card-news {
+      flex: 1 1 30%;
+    }
+  }
+
+  .separator {
+    margin: 40px 0;
+  }
+}
+
+.newsletter {
+  width: 100%;
+  height: auto;
+
+  img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+}
+
+
+.frontImage{
+  width: 100%;
+  height: 50vh;
+
+ background-image: url("../../../../assets/images/arsac_3.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: top;
+  background-size: auto auto;
+}
+
+
+.gridContent{
+  height: 15vh;
+  //width: 50vh;
+  border-style: solid;
+  border-color: black;
+}
+
+.fulldiv{
+  height: 15vh;
+  width: 100%;
+  border-style: solid;
+  border-color: black;
+}

@@ -1,0 +1,247 @@
+#main {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.main-public {
+  height: 100%;
+}
+
+.relative {
+  position: relative;
+}
+
+#sidebar {
+  background-color: #00761a;
+  padding: 15px 0;
+  max-width: 20%;
+  // transition: all 0.5s ease !important;
+
+  .logo {
+    width: 50%;
+    height: auto;
+    margin-left: 25px;
+    object-fit: contain;
+  }
+  &.collapsed {
+    max-width: 110px;
+    .title,
+    .logo {
+      display: none;
+    }
+  }
+  .title {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    line-height: 28px;
+    height: 28px;
+    max-width: 100%;
+    margin-left: 5px;
+    overflow: hidden;
+  }
+  .icon {
+    pointer-events: all;
+  }
+}
+#sidebar-toggle {
+  display: block;
+  margin: 10px 20px;
+  margin-left: auto;
+}
+#content {
+  > mat-card {
+    height: calc(100% - 32px);
+  }
+  padding: 16px 16px 140px 16px;
+  max-width: 100%;
+  &.collapsed {
+    max-width: calc(100% - 110px);
+  }
+}
+.menu {
+  margin-top: 32px;
+  .menu-module {
+    position: relative;
+    cursor: pointer;
+    color: #fff;
+    padding-top: 48px;
+    padding-right: 25px;
+    &:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      border-radius: 0 25px 25px 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+    &:hover::before {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+    &:not(.dashboard)::after {
+      color: #fff;
+      content: "\25BA";
+      position: absolute;
+      right: 30px;
+      pointer-events: none;
+      top: 15px;
+      transition: right 0.5s;
+      font-size: small;
+    }
+    &.active {
+      background-color: rgba(0, 0, 0, 0.1);
+      &::after {
+        transform: rotate(90deg);
+      }
+    }
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.3);
+    }
+    > .menu-module-link {
+      pointer-events: none;
+      z-index: 2;
+      position: absolute;
+      top: 10px;
+      left: 25px;
+      display: flex;
+    }
+    &.dashboard {
+      > .menu-module-link {
+        pointer-events: all;
+      }
+      &.active {
+        border-radius: 0 25px 25px 0;
+        margin-right: 24px;
+        background-color: var(--man-color);
+      }
+    }
+    &:not(.active) {
+      > .children {
+        opacity: 0 !important;
+        max-height: 0 !important;
+      }
+    }
+    > .children {
+      overflow: hidden;
+      height: auto;
+      transition: right 0.5s;
+      opacity: 1;
+      > .menu-link {
+        display: flex;
+        > a {
+          color: #fff !important;
+          text-decoration: none !important;
+        }
+        padding: 10px 25px 10px 45px;
+        border-radius: 0 25px 25px 0;
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.3);
+        }
+        &.active {
+          background-color: rgba(228,223,215,0.7);
+        }
+      }
+    }
+  }
+}
+.versionStyle {
+  text-align: center;
+  color: white;
+  text-shadow: 6px 11px 20px black;
+  font-size: 11px;
+  position: fixed;
+  bottom: 0px;
+  left: 10px;
+}
+
+.media-collapsed {
+  display: none;
+  visibility: hidden;
+}
+
+@media (max-width: 960px) {
+  #sidebar {
+    max-width: 100%;
+    padding-bottom: 50px;
+    .logo {
+      width: 50%;
+      height: auto;
+      margin-left: 25px;
+      object-fit: contain;
+    }
+    &.collapsed {
+      opacity: 0;
+      height: 0;
+      position: absolute;
+      .title {
+        display: none;
+      }
+    }
+    .title {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      line-height: 28px;
+      height: 28px;
+      max-width: 100%;
+      margin-left: 5px;
+      overflow: hidden;
+    }
+    .icon {
+      pointer-events: all;
+    }
+  }
+  #sidebar-toggle {
+    display: block;
+    margin: 10px 20px;
+    margin-left: auto;
+  }
+  #content {
+    > mat-card {
+      height: calc(100% - 32px);
+    }
+    padding: 16px 16px 140px 16px;
+    max-width: 100%;
+    width: 100%;
+    &.collapsed {
+      max-width: 100%;
+    }
+  }
+
+  .head {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 90%;
+    img {
+      object-fit: contain;
+    }
+  }
+
+  .colla {
+    display:none !important;
+    visibility: hidden !important;
+    background: #fff !important;
+  }
+
+  .media-collapsed{
+    display: block;
+    margin: 10px 20px;
+    margin-left: auto;
+    visibility: visible;
+  }
+
+  .media-collapse {
+    display: none;
+    height: 0;
+    overflow: hidden;
+    width: 0;
+  }
+
+  .versionStyle{
+    display: none;
+  }
+}
+

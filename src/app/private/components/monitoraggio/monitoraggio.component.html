@@ -1,0 +1,163 @@
+<div class="content-card">
+
+  <form [formGroup]="searchForm" class="py-12">
+    <div fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutGap="10px" fxLayoutGap.lt-md="0">
+      <mat-form-field fxFlex>
+        <mat-label>Seleziona una scheda</mat-label>
+        <input matInput formControlName="nome_opera" [matAutocomplete]="autoScheda">
+        <mat-autocomplete #autoScheda="matAutocomplete" [displayWith]="utilsService.displayEntity">
+          <mat-option *ngFor="let u of schedeDataSource | async" [value]="u">
+            {{ u }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input formControlName="data" matInput [matDatepicker]="picker" placeholder="Data">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input formControlName="descrizione" matInput placeholder="Note">
+      </mat-form-field>
+      <div fxFlex="144px">
+        <button mat-raised-button (click)="search()" class="mt-4 mx-4" aria-label="Cerca" title="Ricerca">
+          <mat-icon class="mat-24">search</mat-icon>
+        </button>
+        <button mat-raised-button (click)="clear()" class="mt-4 mx-4" aria-label="Reset" title="Resetta i campi">
+          <mat-icon class="mat-24">clear</mat-icon>
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <div class="mat-elevation-z8 mt-20">
+    <mat-table #table [dataSource]="dataSource" class="table-condensed" matSort>
+      <ng-container matColumnDef="id">
+        <mat-header-cell fxFlex="74px" *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
+        <mat-cell fxFlex="74px" *matCellDef="let row">{{ row.id }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="nome_opera">
+        <mat-header-cell fxFlex *matHeaderCellDef mat-sort-header>Opera</mat-header-cell>
+        <mat-cell fxFlex *matCellDef="let row">{{ row.nome_opera }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="descrizione">
+        <mat-header-cell fxFlex *matHeaderCellDef mat-sort-header>Note</mat-header-cell>
+        <mat-cell fxFlex *matCellDef="let row">{{ row.descrizione }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="data">
+        <mat-header-cell fxFlex *matHeaderCellDef mat-sort-header>Date</mat-header-cell>
+        <mat-cell fxFlex *matCellDef="let row">{{ row.data | date}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="dettagli">
+        <mat-header-cell fxFlex="144px" *matHeaderCellDef>Dettagli</mat-header-cell>
+        <mat-cell fxFlex="144px" fxLayoutGap="4px" *matCellDef="let row">
+          <button mat-raised-button (click)="exportPDF(row)" class="colorPrimary" aria-label="Esporta PDF"
+            title="Esporta PDF">
+            <mat-icon>picture_as_pdf</mat-icon>
+          </button>
+          <button mat-raised-button (click)="edit(row)" class="colorPrimary" aria-label="Seleziona"
+            title="Modifica opera">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *cdkRowDef="let row; columns: displayedColumns;"></mat-row>
+
+    </mat-table>
+
+    <div class="empty-table" *ngIf="dataSource.data.length===0">
+      Nessun elemento presente. Per iniziare compila il form di ricerca
+    </div>
+
+    <mat-paginator [pageSizeOptions]="[25, 50, 100]"> </mat-paginator>
+  </div>
+</div>
+<ng-template #detailsModal let-data>
+  <mat-dialog-content class="mat-typography">
+    <h2 *ngIf="editItem && editItem.id" mat-dialog-title>Modifica evento di monitoraggio</h2>
+    <h2 *ngIf="editItem && !editItem.id" mat-dialog-title>Inserisci evento di monitoraggio</h2>
+    <form [formGroup]="editItemForm">
+      <div fxLayout="row wrap" fxLayoutGap="12px">
+        <mat-form-field fxFlex="calc(33% - 12px)">
+          <mat-label>Seleziona una scheda</mat-label>
+          <input matInput formControlName="nome_opera" [matAutocomplete]="autoDettaglioScheda">
+          <mat-autocomplete #autoDettaglioScheda="matAutocomplete" [displayWith]="utilsService.displayEntity">
+            <mat-option *ngFor="let u of schedeDettaglioDataSource | async" [value]="u">
+              {{ u }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        <mat-form-field fxFlex="calc(33% - 12px)">
+          <input rows="4" required formControlName="stato_conservazione" matInput placeholder="Stato di conservazione">
+        </mat-form-field>
+        <mat-form-field fxFlex="calc(33% - 12px)">
+          <input rows="4" formControlName="tipologia_danno" matInput placeholder="Tipologia del danno">
+        </mat-form-field>
+        <mat-form-field fxFlex="calc(33% - 12px)">
+          <input rows="4" formControlName="origine_del_danno" matInput placeholder="Origine del danno">
+        </mat-form-field>
+        <mat-form-field fxFlex="calc(100% - 12px)">
+          <textarea rows="4" formControlName="operazioni_consigliate" matInput placeholder="Operazioni consigliate">
+            {{editItemForm.controls.operazioni_consigliate.value}}
+          </textarea>
+        </mat-form-field>
+        <mat-form-field fxFlex="calc(100% - 12px)">
+          <textarea rows="4" required formControlName="descrizione" matInput placeholder="Note e descrizione">
+            {{editItemForm.controls.descrizione.value}}
+          </textarea>
+        </mat-form-field>
+        <mat-form-field fxFlex="calc(33% - 12px)">
+          <input [required]="true" formControlName="data" matInput [matDatepicker]="picker"
+            placeholder="Data del monitoraggio">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div>
+        <h2 class="allegati">Allegati</h2>
+        <div class="ngx_upload">
+          <ngx-upload [multiple]="true" [asDialog]="false" (afterUpload)="handleUpload($event)"
+            (afterError)="handleUploadError($event)"></ngx-upload>
+        </div>
+      </div>
+      <ng-container *ngIf="editItemForm.controls.allegati.value">
+        <div class="" *ngFor="let a of editItemForm.controls.allegati.value">
+          <div class="area_allegati">
+            <div class="nome_allegato">
+              <p>{{ a.originalFilename }}</p>
+            </div>
+            <div class="">
+              <button class="" mat-raised-button title="Elimina allegato" (click)="deleteFile(a)"
+                *ngIf="editItemForm.enabled">
+                <mat-icon>remove_circle_outline</mat-icon>
+              </button>
+              <button class="" mat-raised-button title="Scarica allegato" (click)="downloadFile(a)"
+                *ngIf="editItemForm.enabled">
+                <mat-icon>download</mat-icon>
+              </button>
+            </div>
+          </div>
+          <hr>
+        </div>
+      </ng-container>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-raised-button (click)="save()" title="Salva opera">Salva</button>
+    <button mat-raised-button (click)="delete()" title="Elimina opera">Elimina</button>
+    <button mat-raised-button mat-dialog-close title="Chiudi modale">Chiudi</button>
+  </mat-dialog-actions>
+</ng-template>
+
+<div class="new-item">
+  <button mat-fab class="colorPrimary" title="Inserisci nuova opera" aria-label="Inserisci una nuova opera"
+    (click)="new()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

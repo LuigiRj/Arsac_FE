@@ -1,0 +1,43 @@
+a {
+  text-decoration: none !important;
+  color: black;
+}
+
+.card:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.card-info {
+  padding: 2px 0px;
+  display: flex;
+  flex-direction: column;
+
+  .titolo {
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  .autore {
+    font-size: 1.1rem;
+    font-weight: 400;
+  }
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.image-container {
+  width: 270px;
+  height: 270px;
+  overflow: hidden;
+  img {
+    width: inherit;
+    height: inherit;
+    object-fit: cover;
+  }
+}
